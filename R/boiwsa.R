@@ -9,7 +9,7 @@
 #' @param x Input time series as a numeric vector
 #' @param dates Dates in a date format
 #' @param r Defines the rate of decay of the weights. Should be between zero and one. By default is set to 0.8.
-#' @param auto.ao.seacrh Search for additive outliers (T or F)
+#' @param auto.ao.seacrh Boolean. Search for additive outliers
 #' @param ao.list Vector with user specified additive outliers in a date format
 #' @param my.k_l Numeric vector defining the number of yearly and monthly trigonometric variables. If NULL, is found automatically using the information criteria
 #' @param H Matrix with holiday- and trading day factors

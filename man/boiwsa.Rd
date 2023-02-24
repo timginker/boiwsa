@@ -23,7 +23,7 @@ boiwsa(
 
 \item{r}{Defines the rate of decay of the weights. Should be between zero and one. By default is set to 0.8.}
 
-\item{auto.ao.seacrh}{Search for additive outliers (T or F)}
+\item{auto.ao.seacrh}{Boolean. Search for additive outliers}
 
 \item{ao.list}{Vector with user specified additive outliers in a date format}
 
