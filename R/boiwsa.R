@@ -1,4 +1,4 @@
-#' Weekly Seasonal adjustment
+#' Seasonal adjustment of weekly data
 #'
 #' @import lubridate
 #' @import zoo
@@ -13,14 +13,20 @@
 #' @param ao.list Vector with user specified additive outliers in a date format
 #' @param my.k_l Numeric vector defining the number of yearly and monthly trigonometric variables. If NULL, is found automatically using the information criteria
 #' @param H Matrix with holiday- and trading day factors
-#' @param ic Information criterion used in the automatic search for the number of trigonometric regressors. There are thee options: aic, aicc and bic. By default uses aicc.
-#' @param method Decomposition type: additive or multiplicative.
+#' @param ic Information criterion used in the automatic search for the number of trigonometric regressors. There are thee options: aic, aicc and bic. By default uses aicc
+#' @param method Decomposition type: additive or multiplicative
 #'
-#' @return
+#' @return {sa} {Seasonally adjusted series}
+#' @return {my.k_l} {Number of trigonometric variables used to model the seasonal pattern}
+#' @return {sf} {Estimated seasonal effects}
+#' @return {hol.factors} {Estimated holiday effects}
+#' @return {out.factors} {Estimated outlier effects}
+#' @return {beta} {Regression coefficients for the last year}
+#' @return {m} {lm object. Unweighted OLS regression on the full sample}
 #' @author Tim Ginker
 #' @export
 #'
-#' @examples
+
 boiwsa=function(x,dates,r=0.8,auto.ao.seacrh=T,ao.list=NULL,my.k_l=NULL,H=NULL,ic="aicc",method="additive"){
   ############
   # Arguments:

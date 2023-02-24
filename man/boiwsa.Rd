@@ -2,7 +2,7 @@
 % Please edit documentation in R/boiwsa.R
 \name{boiwsa}
 \alias{boiwsa}
-\title{Weekly Seasonal adjustment}
+\title{Seasonal adjustment of weekly data}
 \usage{
 boiwsa(
   x,
@@ -31,12 +31,27 @@ boiwsa(
 
 \item{H}{Matrix with holiday- and trading day factors}
 
-\item{ic}{Information criterion used in the automatic search for the number of trigonometric regressors. There are thee options: aic, aicc and bic. By default uses aicc.}
+\item{ic}{Information criterion used in the automatic search for the number of trigonometric regressors. There are thee options: aic, aicc and bic. By default uses aicc}
 
-\item{method}{Decomposition type: additive or multiplicative.}
+\item{method}{Decomposition type: additive or multiplicative}
+}
+\value{
+{sa} {Seasonally adjusted series}
+
+{my.k_l} {Number of trigonometric variables used to model the seasonal pattern}
+
+{sf} {Estimated seasonal effects}
+
+{hol.factors} {Estimated holiday effects}
+
+{out.factors} {Estimated outlier effects}
+
+{beta} {Regression coefficients for the last year}
+
+{m} {lm object. Unweighted OLS regression on the full sample}
 }
 \description{
-Weekly Seasonal adjustment
+Seasonal adjustment of weekly data
 }
 \author{
 Tim Ginker
