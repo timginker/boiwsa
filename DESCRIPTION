@@ -1,0 +1,19 @@
+Package: boiwsa
+Title: Seasonal adjustment of weekly data
+Version: 0.0.0.9000
+Authors@R: 
+    person("Tim", "Ginker", , "tim.ginker@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: Seasonal adjustment of weekly data.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports: 
+    boiwsa,
+    dplyr,
+    Hmisc,
+    lubridate,
+    MuMIn,
+    stats,
+    zoo
