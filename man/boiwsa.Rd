@@ -17,8 +17,25 @@ boiwsa(
 )
 }
 \arguments{
-\item{method}{}
+\item{x}{Input time series as a numeric vector}
+
+\item{dates}{Date in a date format}
+
+\item{auto.ao.seacrh}{Search for additive outliers (T or F)}
+
+\item{ao.list}{List with user specified additive outliers in a date format}
+
+\item{my.k_l}{Numeric vector defining the number of yearly and monthly trigonometric variables. If NULL, is found automatically using the information criteria}
+
+\item{H}{Matrix with holiday- and trading day factors}
+
+\item{ic}{Information criterion used in the automatic search for the number of trigonometric regressors. There are thee options: aic, aicc and bic. By default uses aicc.}
+
+\item{method}{Additive or multiplicative}
 }
 \description{
 Weekly Seasonal adjustment
+}
+\author{
+Tim Ginker
 }
