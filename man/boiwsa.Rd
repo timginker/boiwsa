@@ -21,6 +21,8 @@ boiwsa(
 
 \item{dates}{Date in a date format}
 
+\item{r}{Defines the rate of decay of the weights. Should be between zero and one. By default is set to 0.8.}
+
 \item{auto.ao.seacrh}{Search for additive outliers (T or F)}
 
 \item{ao.list}{List with user specified additive outliers in a date format}
@@ -31,7 +33,7 @@ boiwsa(
 
 \item{ic}{Information criterion used in the automatic search for the number of trigonometric regressors. There are thee options: aic, aicc and bic. By default uses aicc.}
 
-\item{method}{Additive or multiplicative}
+\item{method}{Decomposition type: additive or multiplicative.}
 }
 \description{
 Weekly Seasonal adjustment

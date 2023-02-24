@@ -8,13 +8,13 @@
 #'
 #' @param x Input time series as a numeric vector
 #' @param dates Date in a date format
-#' @param r
+#' @param r Defines the rate of decay of the weights. Should be between zero and one. By default is set to 0.8.
 #' @param auto.ao.seacrh Search for additive outliers (T or F)
 #' @param ao.list List with user specified additive outliers in a date format
 #' @param my.k_l Numeric vector defining the number of yearly and monthly trigonometric variables. If NULL, is found automatically using the information criteria
 #' @param H Matrix with holiday- and trading day factors
 #' @param ic Information criterion used in the automatic search for the number of trigonometric regressors. There are thee options: aic, aicc and bic. By default uses aicc.
-#' @param method Additive or multiplicative
+#' @param method Decomposition type: additive or multiplicative.
 #'
 #' @return
 #' @author Tim Ginker
