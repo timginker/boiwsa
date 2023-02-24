@@ -19,13 +19,13 @@ boiwsa(
 \arguments{
 \item{x}{Input time series as a numeric vector}
 
-\item{dates}{Date in a date format}
+\item{dates}{Dates in a date format}
 
 \item{r}{Defines the rate of decay of the weights. Should be between zero and one. By default is set to 0.8.}
 
 \item{auto.ao.seacrh}{Search for additive outliers (T or F)}
 
-\item{ao.list}{List with user specified additive outliers in a date format}
+\item{ao.list}{Vector with user specified additive outliers in a date format}
 
 \item{my.k_l}{Numeric vector defining the number of yearly and monthly trigonometric variables. If NULL, is found automatically using the information criteria}
 
