@@ -2,6 +2,7 @@
 
 export(boiwsa)
 export(fourier_vars)
+export(my_ao)
 import(Hmisc)
 import(MuMIn)
 import(lubridate)
