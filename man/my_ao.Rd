@@ -2,7 +2,7 @@
 % Please edit documentation in R/my_ao.R
 \name{my_ao}
 \alias{my_ao}
-\title{Title}
+\title{Create additive outlier variables}
 \usage{
 my_ao(dates, out.list)
 }
@@ -15,5 +15,5 @@ my_ao(dates, out.list)
 AO matrix with outlier variables
 }
 \description{
-Title
+Create additive outlier variables
 }

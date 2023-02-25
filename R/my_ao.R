@@ -1,4 +1,4 @@
-#' Title
+#' Create additive outlier variables
 #'
 #' @param dates Vector of dates in a date format
 #' @param out.list Vector of outlier dates in a date format

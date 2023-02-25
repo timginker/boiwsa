@@ -1,4 +1,4 @@
-#' Title
+#' Create fourier predictors
 #'
 #' @param k Number of yearly cycle fourier terms
 #' @param l Number of monthly cycle fourier terms

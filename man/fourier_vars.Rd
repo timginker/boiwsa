@@ -2,7 +2,7 @@
 % Please edit documentation in R/fourier_vars.R
 \name{fourier_vars}
 \alias{fourier_vars}
-\title{Title}
+\title{Create fourier predictors}
 \usage{
 fourier_vars(k = 1, l = 1, dates)
 }
@@ -17,5 +17,5 @@ fourier_vars(k = 1, l = 1, dates)
 Matrix with fourier variables
 }
 \description{
-Title
+Create fourier predictors
 }
