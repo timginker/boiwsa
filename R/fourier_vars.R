@@ -1,22 +1,17 @@
 #' Create fourier predictors
 #'
+#' Creates sine and cosine variables to capture intramonthly and intrayearly cycles.
+#'
 #' @param k Number of yearly cycle fourier terms
 #' @param l Number of monthly cycle fourier terms
 #' @param dates Vector of dates in a date format
 #'
 #' @return Matrix with fourier variables
+#' @author Tim Ginker
 #' @export
 #'
 fourier_vars=function(k=1,l=1,dates){
 
-  # packages: Hmisc, lubridate
-
-
-  # k- number of yearly cycle fourier terms
-  # l - number of monthly cycle fourier terms
-  # dates - a vector of dates in a date format
-
-  # creating monthly cycle variables
 
   if (l>0) {
 

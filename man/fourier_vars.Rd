@@ -17,5 +17,8 @@ fourier_vars(k = 1, l = 1, dates)
 Matrix with fourier variables
 }
 \description{
-Create fourier predictors
+Creates sine and cosine variables to capture intramonthly and intrayearly cycles.
+}
+\author{
+Tim Ginker
 }

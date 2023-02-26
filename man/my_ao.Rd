@@ -15,5 +15,8 @@ my_ao(dates, out.list)
 AO matrix with outlier variables
 }
 \description{
-Create additive outlier variables
+Creates a matrix with additive outlier variables. Uses the original data dates and the user specified outlier dates.
+}
+\author{
+Tim Ginker
 }

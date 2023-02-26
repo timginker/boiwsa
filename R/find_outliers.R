@@ -1,18 +1,33 @@
 #' Find additive outliers
 #'
-#' @param y Numeric vector with a detrended dependent variable
+#' Searches for additive outliers using the method described in Appendix C of Findley et al. (1998).
+#' If the number of trigonometric variables is not specified will search automatically through the model space to identify the best number of trigonometric variables, with the lowest AIC, AICc or BIC value.
+#'
+#' @param x Numeric vector. Time series to seasonally adjust
 #' @param dates Vector with dates in a date format
 #' @param out.tolerance t-stat threshold for outliers (see Findley et al., 1998)
-#' @param my.AO.list Vector with user defined additive outlier variables
-#' @param H Matrix with holiday and trading day variables
-#' @param my.k_l Vector with the number of fourier terms to capture the yeraly and monthly cycle. If NULL, would perform automatic search
+#' @param my.AO.list (optional) Vector with user defined additive outlier variables
+#' @param H (optional) Matrix with holiday and trading day variables
+#' @param my.k_l (optional) Vector with the number of fourier terms to capture the yearly and monthly cycle. If NULL, would perform automatic search
+#' @param method Decomposition method: "additive" or "multiplicative". By default uses the additive method
 #'
 #' @return my.k_l
 #' @return ao list of AO dates
+#' @author Tim Ginker
+#' @references Findley, D.F., Monsell, B.C., Bell, W.R., Otto, M.C. and B.C Chen (1998). New capabilities and methods of the X-12-ARIMA seasonal-adjustment program. Journal of Business & Economic Statistics, 16(2), pp.127-152.
 #' @export
 #'
 
-find_outliers=function(y,dates,out.tolerance=3.8,my.AO.list=NULL,H=NULL,my.k_l=NULL){
+find_outliers=function(x,dates,out.tolerance=3.8,my.AO.list=NULL,H=NULL,my.k_l=NULL,method="additive"){
+
+
+  if (method=="multiplicative") {
+    x=log(x)
+  }
+
+  trend.init=stats::supsmu(1:length(x),x)$y
+
+  y=x-trend.init
 
   if (is.null(my.k_l)) {
 
@@ -33,7 +48,7 @@ find_outliers=function(y,dates,out.tolerance=3.8,my.AO.list=NULL,H=NULL,my.k_l=N
 
   err=y-Xs%*%solve(t(Xs)%*%Xs)%*%t(Xs)%*%y
 
-  sig_R=1.49*median(abs(err))
+  sig_R=1.49*stats::median(abs(err))
 
 
 
@@ -110,7 +125,7 @@ find_outliers=function(y,dates,out.tolerance=3.8,my.AO.list=NULL,H=NULL,my.k_l=N
 
     err=y-Xst%*%solve(t(Xst)%*%Xst)%*%t(Xst)%*%y
 
-    sig_R=1.49*median(abs(err))
+    sig_R=1.49*stats::median(abs(err))
 
     Tt=abs((solve(t(Xst)%*%Xst)%*%t(Xst)%*%y)/(diag(solve((t(Xst)%*%Xst))*sig_R^2)^0.5))[(ncol(Xst)-length(f.sel.ao.dates)+1):ncol(Xst)]
 

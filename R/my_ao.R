@@ -1,9 +1,12 @@
 #' Create additive outlier variables
 #'
+#' Creates a matrix with additive outlier variables. Uses the original data dates and the user specified outlier dates.
+#'
 #' @param dates Vector of dates in a date format
 #' @param out.list Vector of outlier dates in a date format
 #'
 #' @return AO matrix with outlier variables
+#' @author Tim Ginker
 #' @export
 #'
 my_ao=function(dates,out.list) {

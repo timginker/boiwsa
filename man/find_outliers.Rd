@@ -5,26 +5,29 @@
 \title{Find additive outliers}
 \usage{
 find_outliers(
-  y,
+  x,
   dates,
   out.tolerance = 3.8,
   my.AO.list = NULL,
   H = NULL,
-  my.k_l = NULL
+  my.k_l = NULL,
+  method = "additive"
 )
 }
 \arguments{
-\item{y}{Numeric vector with a detrended dependent variable}
+\item{x}{Numeric vector. Time series to seasonally adjust}
 
 \item{dates}{Vector with dates in a date format}
 
 \item{out.tolerance}{t-stat threshold for outliers (see Findley et al., 1998)}
 
-\item{my.AO.list}{Vector with user defined additive outlier variables}
+\item{my.AO.list}{(optional) Vector with user defined additive outlier variables}
 
-\item{H}{Matrix with holiday and trading day variables}
+\item{H}{(optional) Matrix with holiday and trading day variables}
 
-\item{my.k_l}{Vector with the number of fourier terms to capture the yeraly and monthly cycle. If NULL, would perform automatic search}
+\item{my.k_l}{(optional) Vector with the number of fourier terms to capture the yearly and monthly cycle. If NULL, would perform automatic search}
+
+\item{method}{Decomposition method: "additive" or "multiplicative". By default uses the additive method}
 }
 \value{
 my.k_l
@@ -32,5 +35,12 @@ my.k_l
 ao list of AO dates
 }
 \description{
-Find additive outliers
+Searches for additive outliers using the method described in Appendix C of Findley et al. (1998).
+If the number of trigonometric variables is not specified will search automatically through the model space to identify the best number of trigonometric variables, with the lowest AIC, AICc or BIC value.
+}
+\references{
+Findley, D.F., Monsell, B.C., Bell, W.R., Otto, M.C. and B.C Chen (1998). New capabilities and methods of the X-12-ARIMA seasonal-adjustment program. Journal of Business & Economic Statistics, 16(2), pp.127-152.
+}
+\author{
+Tim Ginker
 }
