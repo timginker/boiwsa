@@ -25,7 +25,11 @@
 #' @return {m} {lm object. Unweighted OLS regression on the full sample}
 #' @author Tim Ginker
 #' @export
+#' @examples
+#'  # Seasonal adjustment of weekly US gasoline production
 #'
+#'  data("gasoline.data")
+#'  res=boiwsa(x=gasoline.data$y,dates=gasoline.data$date) # Seasonal adjustment using automatic model selection
 
 boiwsa=function(x,dates,r=0.8,auto.ao.seacrh=T,ao.list=NULL,my.k_l=NULL,H=NULL,ic="aicc",method="additive"){
   ############
