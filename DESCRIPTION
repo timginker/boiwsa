@@ -17,3 +17,5 @@ Imports:
     stats,
     zoo
 LazyData: true
+Depends: 
+    R (>= 2.10)
