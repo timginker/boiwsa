@@ -24,8 +24,8 @@
 #' @source Personal
 "dates_il"
 
-#' @title DATASET_TITLE
-#' @description DATASET_DESCRIPTION
+#' @title Israeli moving holiday dates
+#' @description Rosh Hashanah and Pesach dates
 #' @format A data frame with 51 rows and 3 variables:
 #' \describe{
 #'   \item{\code{year}}{Year}

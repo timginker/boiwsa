@@ -3,7 +3,7 @@
 \docType{data}
 \name{holiday_dates_il}
 \alias{holiday_dates_il}
-\title{DATASET_TITLE}
+\title{Israeli moving holiday dates}
 \format{
 A data frame with 51 rows and 3 variables:
 \describe{
@@ -19,6 +19,6 @@ Personal
 holiday_dates_il
 }
 \description{
-DATASET_DESCRIPTION
+Rosh Hashanah and Pesach dates
 }
 \keyword{datasets}
