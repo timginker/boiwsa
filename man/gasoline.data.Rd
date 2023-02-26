@@ -22,6 +22,5 @@ gasoline.data
 }
 \description{
 Weekly data beginning 2 February 1991, ending 20 January 2017. Units are "million barrels per day".
-Report ...
 }
 \keyword{datasets}
