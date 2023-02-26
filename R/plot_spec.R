@@ -5,7 +5,6 @@
 #' @param x boiwsa results
 #'
 #' @return AR spectrum plot
-#' @author Tim Ginker
 #' @export
 #'
 #' @examples

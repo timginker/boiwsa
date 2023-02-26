@@ -17,6 +17,3 @@ AO matrix with outlier variables
 \description{
 Creates a matrix with additive outlier variables. Uses the original data dates and the user specified outlier dates.
 }
-\author{
-Tim Ginker
-}

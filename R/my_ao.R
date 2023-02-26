@@ -6,7 +6,6 @@
 #' @param out.list Vector of outlier dates in a date format
 #'
 #' @return AO matrix with outlier variables
-#' @author Tim Ginker
 #' @export
 #'
 my_ao=function(dates,out.list) {

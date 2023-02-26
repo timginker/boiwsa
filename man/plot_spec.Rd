@@ -21,6 +21,3 @@ res=boiwsa(x=gasoline.data$y,dates=gasoline.data$date) # Seasonal adjustment usi
 plot_spec(res)
 
 }
-\author{
-Tim Ginker
-}
