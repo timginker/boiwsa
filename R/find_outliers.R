@@ -35,7 +35,7 @@ find_outliers=function(x,dates,out.tolerance=3.8,my.AO.list=NULL,H=NULL,my.k_l=N
       AO=NULL
     }
 
-    opt=find_opt(y = y, dates = dates,H = H, AO = AO)
+    opt=find_opt(x = x, dates = dates,H = H, AO = AO)
 
     my.k_l=opt$opt.aicc
 
