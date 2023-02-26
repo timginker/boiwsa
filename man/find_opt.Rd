@@ -4,20 +4,25 @@
 \alias{find_opt}
 \title{Find optimal number of fourier variables}
 \usage{
-find_opt(y, dates, H = NULL, AO = NULL)
+find_opt(x, dates, H = NULL, AO = NULL, method = "additive")
 }
 \arguments{
-\item{y}{Numeric vector with a detrended dependent variable}
+\item{x}{Numeric vector. Time series to seasonally adjust}
 
 \item{dates}{Vector with dates in a date format}
 
-\item{H}{Matrix with holiday and trading day variables}
+\item{H}{(optional) Matrix with holiday and trading day variables}
 
-\item{AO}{Matrix with additive outlier variables}
+\item{AO}{(optional) Matrix with additive outlier variables}
+
+\item{method}{Decomposition method: "additive" or "multiplicative". By default uses the additive method}
 }
 \value{
 list with the optimal number of fourier terms according to AIC, AICc and BIC
 }
 \description{
-Find optimal number of fourier variables
+Searches through the model space to identify the best number of trigonometric variables, with the lowest AIC, AICc or BIC value.
+}
+\author{
+Tim Ginker
 }
