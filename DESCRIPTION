@@ -16,3 +16,4 @@ Imports:
     MuMIn,
     stats,
     zoo
+LazyData: true
