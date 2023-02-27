@@ -133,7 +133,7 @@ plot_spec(res)
 
 
 
-# Refrences
+# References
 
 Cleveland, W.P., Evans, T.D. and S. Scott (2014). Weekly Seasonal Adjustment-A Locally-weighted Regression Approach (No. 473). Bureau of Labor Statistics.
 

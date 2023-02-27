@@ -127,7 +127,7 @@ plot_spec(res)
 
 <img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
 
-# Refrences
+# References
 
 Cleveland, W.P., Evans, T.D. and S. Scott (2014). Weekly Seasonal
 Adjustment-A Locally-weighted Regression Approach (No. 473). Bureau of
