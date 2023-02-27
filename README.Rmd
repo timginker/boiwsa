@@ -45,7 +45,7 @@ n_{t}^{y}})+\beta _{k}^{y}\cos (\frac{2\pi kD_{t}^{y}}{n_{t}^{y}})\right) +
 
 where $D_{t}^{y}$ and $D_{t}^{m}$ are the day of the year and the day of the
 month, and $n_{t}^{y}$ and $n_{t}^{m}$ are the number of days in the given
-month or year.  
+month or year. Thus, the seasonal adjustment procedure takes into account the existence of two cycles, namely intrayearly and intramonthly.
 
 
 
@@ -100,8 +100,10 @@ res=boiwsa(x=gasoline.data$y,dates=gasoline.data$date)
 
 ```
 
+The `x` argument takes the series to be seasonally adjusted, while the dates argument takes the associated dates in date format. Unless specified otherwise (i.e., `my.k_l = NULL`), the procedure automatically identifies the best number of trigonometric variables to capture the yearly ($K$) and monthly ($L$) cycles based on the AICc. The information criterion is specified by the `ic` option.
 
-The `x` argument takes series to seasonally adjust, and the `dates` argument takes the associated dates in a date format.
+The procedure automatically searches for additive outliers (AO) using the method described in Appendix C of Findley et al. (1998). To disable the automatic AO search, set `auto.ao.search = F`. To add user-defined AOs, use the `ao.list` option.
+
 
 The `boiwsa` function returns a list object containing the results. The seasonally adjusted series is stored in a vector called `sa`. In addition, the estimated seasonal factors are stored as `sf`. 
 
