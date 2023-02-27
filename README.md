@@ -12,7 +12,9 @@ et al., 2014). We consider the following decomposition model:
 
 $$
 y_{t}=T_{t}+S_{t}+H_{t}+O_{t}+I_{t},
-$$ where $T_{t}$, $S_{t}$ , $O_{t},$ $H_{t}$ and $I_{t}$ represent the
+$$
+
+where $T_{t}$, $S_{t}$ , $O_{t},$ $H_{t}$ and $I_{t}$ represent the
 trend, seasonal, outlier, holiday- and trading-day, and irregular
 components, respectively. The seasonal component is modeled as
 
