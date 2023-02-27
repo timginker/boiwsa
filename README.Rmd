@@ -18,7 +18,12 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-boiwsa is a package for seasonal adjustment of weekly data. It is implemented using a locally-weighted least squares procedure (Cleveland et al., 2014). We consider the following decomposition model:
+boiwsa is an R package for performing weekly seasonal adjustment on time series data. It provides a simple, easy-to-use interface for calculating seasonally adjusted estimates of weekly data, as well as a number of diagnostic tools for evaluating the quality of the adjustments.
+
+The seasonal adjustment procedure is based on a locally-weighted least squares procedure (Cleveland et al., 2014).
+
+
+We consider the following decomposition model:
 
 $$
 y_{t}=T_{t}+S_{t}+H_{t}+O_{t}+I_{t},
@@ -46,28 +51,48 @@ month or year.
 
 The trend component is extracted with Friedman's SuperSmoother using `stats::supsmu()`. 
 
+
+
+
+
 ## Installation
 
-You can install the development version of boiwsa from [GitHub](https://github.com/) with:
+To install boiwsa, you can use devtools:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("timginker/boiwsa")
 ```
 
-## Example
+Alternatively, you can clone the repository and install the package from source:
 
-TBA
+``` bash
+git clone https://github.com/yourusername/boiwsa.git
+cd boiwsa
+R CMD INSTALL .
+```
+
+
+
+## Usage
+
+Using `boiwsa` is simple. First, load the `boiwsa` package:
 
 ```{r}
 library(boiwsa)
+```
+
+Next, load your time series data into a data frame object. Here is an example that is based on the `gasoline` data from the `fpp2` package:
+
+
+```{r}
 data("gasoline.data")
 
 plot(gasoline.data$date,gasoline.data$y,type="l",xlab="Year",ylab=" ", main="Weekly US gasoline production")
-
 ```
 
-## Performing seasonal adjustment using defaults.
+
+Once you have your data loaded, you can use the `boiwsa` function to perform weekly seasonal adjustment:
 
 ```{r}
 
@@ -76,14 +101,12 @@ res=boiwsa(x=gasoline.data$y,dates=gasoline.data$date)
 ```
 
 
-## Inspecting the results:
+The `x` argument takes series to seasonally adjust, and the `dates` argument takes the associated dates in a date format.
 
-Number of trigonometric terms chosen by the automatic procedure
+The `boiwsa` function returns a list object containing the results. The seasonally adjusted series is stored in a vector called `sa`. In addition, the estimated seasonal factors are stored as `sf`. 
 
-```{r}
-res$my.k_l
-```
-## Plotting 
+
+You can then plot the adjusted data to visualize the seasonal pattern:
 
 ```{r}
 plot(gasoline.data$date,gasoline.data$y,type="l",xlab="Year",ylab=" ", main="Weekly US gasoline production")
@@ -97,11 +120,16 @@ legend(
 )
 ```
 
-## Inspecting the spectrum
+
+To evaluate the quality of the adjustment, you can use the `plot_spec` function provided by the package, which generates a plot of the autoregressive spectrum of the raw and seasonally adjusted data:
+
+
 
 ```{r}
 plot_spec(res)
 ```
+
+
 
 # Refrences
 
