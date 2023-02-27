@@ -7,7 +7,29 @@
 <!-- badges: end -->
 
 boiwsa is a package for seasonal adjustment of weekly data. It is
-implemented using a locally-weighted least squares procedure.
+implemented using a locally-weighted least squares procedure (Cleveland
+et al., 2014). We consider the following decomposition model:
+
+$$
+y_{t}=T_{t}+S_{t}+H_{t}+O_{t}+I_{t},
+$$ where $T_{t}$, $S_{t}$ , $O_{t},$ $H_{t}$ and $I_{t}$ represent the
+trend, seasonal, outlier, holiday- and trading-day, and irregular
+components, respectively. The seasonal component is modeled as
+
+$$\begin{eqnarray*}
+S_{t} &=&\sum_{k=1}^{K}\left( \alpha _{k}^{y}\sin (\frac{2\pi kD_{t}^{y}}{
+n_{t}^{y}})+\beta _{k}^{y}\cos (\frac{2\pi kD_{t}^{y}}{n_{t}^{y}})\right) +
+\\
+&&\sum_{l=1}^{L}\left( \alpha _{l}^{m}\sin (\frac{2\pi kD_{t}^{m}}{n_{t}^{m}}
+)+\beta _{l}^{m}\cos (\frac{2\pi kD_{t}^{m}}{n_{t}^{m}})\right) ,
+\end{eqnarray*}$$
+
+where $D_{t}^{y}$ and $D_{t}^{m}$ are the day of the year and the day of
+the month, and $n_{t}^{y}$ and $n_{t}^{m}$ are the number of days in the
+given month or year.
+
+The trend component is extracted with Friedman’s SuperSmoother using
+`stats::supsmu()`.
 
 ## Installation
 
@@ -71,3 +93,9 @@ plot_spec(res)
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+
+# Refrences
+
+Cleveland, W.P., Evans, T.D. and S. Scott (2014). Weekly Seasonal
+Adjustment-A Locally-weighted Regression Approach (No. 473). Bureau of
+Labor Statistics.
