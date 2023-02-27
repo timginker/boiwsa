@@ -54,7 +54,7 @@ Alternatively, you can clone the repository and install the package from
 source:
 
 ``` bash
-git clone https://github.com/yourusername/boiwsa.git
+git clone https://github.com/timginker/boiwsa.git
 cd boiwsa
 R CMD INSTALL .
 ```
