@@ -137,3 +137,20 @@ Findley, D.F., Monsell, B.C., Bell, W.R., Otto, M.C. and B.C Chen
 (1998). New capabilities and methods of the X-12-ARIMA
 seasonal-adjustment program. Journal of Business & Economic Statistics,
 16(2), pp.127-152.
+
+# Disclaimer
+
+The views expressed here are solely of the author and do not necessarily
+represent the views of the Bank of Israel.
+
+Please note that `boiwsa` is still under development and may contain
+bugs or other issues that have not yet been resolved. While we have made
+every effort to ensure that the package is functional and reliable, we
+cannot guarantee its performance in all situations.
+
+We strongly advise that you regularly check for updates and install any
+new versions that become available, as these may contain important bug
+fixes and other improvements. By using this package, you acknowledge and
+accept that it is provided on an “as is” basis, and that we make no
+warranties or representations regarding its suitability for your
+specific needs or purposes.
