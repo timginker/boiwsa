@@ -1,6 +1,6 @@
 #' Generate Holiday Regression Variables
 #'
-#'
+#' Can be used to create moving holiday regressors (for the U. S. holidays of Easter, Labor Day, and Thanksgiving or for Israeli Rosh Hashanah and Pesach) similarly to the genhol software by the U.S. Census Bureau.
 #'
 #'
 #' @import lubridate
