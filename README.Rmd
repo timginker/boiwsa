@@ -139,7 +139,7 @@ Cleveland, W.P., Evans, T.D. and S. Scott (2014). Weekly Seasonal Adjustment-A L
 
 
 
-
+Findley, D.F., Monsell, B.C., Bell, W.R., Otto, M.C. and B.C Chen (1998). New capabilities and methods of the X-12-ARIMA seasonal-adjustment program. Journal of Business & Economic Statistics, 16(2), pp.127-152.
 
 
 

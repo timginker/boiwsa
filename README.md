@@ -132,3 +132,8 @@ plot_spec(res)
 Cleveland, W.P., Evans, T.D. and S. Scott (2014). Weekly Seasonal
 Adjustment-A Locally-weighted Regression Approach (No. 473). Bureau of
 Labor Statistics.
+
+Findley, D.F., Monsell, B.C., Bell, W.R., Otto, M.C. and B.C Chen
+(1998). New capabilities and methods of the X-12-ARIMA
+seasonal-adjustment program. Journal of Business & Economic Statistics,
+16(2), pp.127-152.
