@@ -6,10 +6,11 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-boiwsa is an R package for performing weekly seasonal adjustment on time
-series data. It provides a simple, easy-to-use interface for calculating
-seasonally adjusted estimates of weekly data, as well as a number of
-diagnostic tools for evaluating the quality of the adjustments.
+`boiwsa` is an R package for performing weekly seasonal adjustment on
+time series data. It provides a simple, easy-to-use interface for
+calculating seasonally adjusted estimates of weekly data, as well as a
+number of diagnostic tools for evaluating the quality of the
+adjustments.
 
 The seasonal adjustment procedure is based on a locally-weighted least
 squares procedure (Cleveland et al., 2014).
