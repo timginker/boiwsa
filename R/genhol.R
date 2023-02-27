@@ -1,6 +1,8 @@
 #' Generate Holiday Regression Variables
 #'
-#' Can be used to create moving holiday regressors (for the U. S. holidays of Easter, Labor Day, and Thanksgiving or for Israeli Rosh Hashanah and Pesach) similarly to the genhol software by the U.S. Census Bureau.
+#' Can be used to generate moving holiday regressors for the U. S. holidays of Easter,
+#' Labor Day, and Thanksgiving; or for Israeli Rosh Hashanah and Pesach. The variables are computed
+#' using the Easter formula in Table 2 of Findley et al. (1998). Uses calendar centring to avoid bias.
 #'
 #'
 #' @import lubridate
@@ -13,11 +15,13 @@
 #' @param end integer, shifts end point of the holiday. Use negative values if end is before the specified date.
 #'
 #' @return an matrix with holiday variables that can be used as a user defined variable in boiwsa().
+#' @references Findley, D.F., Monsell, B.C., Bell, W.R., Otto, M.C. and B.C Chen (1998). New capabilities and methods of the X-12-ARIMA seasonal-adjustment program. Journal of Business & Economic Statistics, 16(2), pp.127-152.
 #' @export
 #' @examples
 #'
 #' # Creating moving holiday variable for Israeli Rosh Hashanah
 #' data(gasoline.data)
+#' data(holiday_dates_il) # dates of Israeli Rosh Hashanah and Pesach
 #' movehol=genhol(gasoline.data$date,holiday.dates = holiday_dates_il$rosh)
 #'
 #'
