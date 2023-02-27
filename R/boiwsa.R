@@ -2,7 +2,7 @@
 #'
 #' @import lubridate
 #' @import zoo
-#' @import Hmisc
+#' @importFrom Hmisc yearDays
 #' @import MuMIn
 #' @import tidyverse
 #'
