@@ -19,7 +19,7 @@ boiwsa(
 \arguments{
 \item{x}{Input time series as a numeric vector}
 
-\item{dates}{Dates in a date format}
+\item{dates}{a vector of class "Date", containing the data dates}
 
 \item{r}{Defines the rate of decay of the weights. Should be between zero and one. By default is set to 0.8.}
 

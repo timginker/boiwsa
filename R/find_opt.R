@@ -3,13 +3,12 @@
 #' Searches through the model space to identify the best number of trigonometric variables, with the lowest AIC, AICc or BIC value.
 #'
 #' @param x Numeric vector. Time series to seasonally adjust
-#' @param dates Vector with dates in a date format
+#' @param dates a vector of class "Date", containing the data dates
 #' @param H (optional) Matrix with holiday and trading day variables
 #' @param AO (optional) Matrix with additive outlier variables
 #' @param method Decomposition method: "additive" or "multiplicative". By default uses the additive method
 #'
 #' @return list with the optimal number of fourier terms according to AIC, AICc and BIC
-#' @author Tim Ginker
 #' @export
 #'
 

@@ -17,7 +17,7 @@ find_outliers(
 \arguments{
 \item{x}{Numeric vector. Time series to seasonally adjust}
 
-\item{dates}{Vector with dates in a date format}
+\item{dates}{a vector of class "Date", containing the data dates}
 
 \item{out.tolerance}{t-stat threshold for outliers (see Findley et al., 1998)}
 
@@ -40,7 +40,4 @@ If the number of trigonometric variables is not specified will search automatica
 }
 \references{
 Findley, D.F., Monsell, B.C., Bell, W.R., Otto, M.C. and B.C Chen (1998). New capabilities and methods of the X-12-ARIMA seasonal-adjustment program. Journal of Business & Economic Statistics, 16(2), pp.127-152.
-}
-\author{
-Tim Ginker
 }

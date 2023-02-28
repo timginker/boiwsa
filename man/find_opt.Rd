@@ -9,7 +9,7 @@ find_opt(x, dates, H = NULL, AO = NULL, method = "additive")
 \arguments{
 \item{x}{Numeric vector. Time series to seasonally adjust}
 
-\item{dates}{Vector with dates in a date format}
+\item{dates}{a vector of class "Date", containing the data dates}
 
 \item{H}{(optional) Matrix with holiday and trading day variables}
 
@@ -22,7 +22,4 @@ list with the optimal number of fourier terms according to AIC, AICc and BIC
 }
 \description{
 Searches through the model space to identify the best number of trigonometric variables, with the lowest AIC, AICc or BIC value.
-}
-\author{
-Tim Ginker
 }

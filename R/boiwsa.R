@@ -7,7 +7,7 @@
 #' @import tidyverse
 #'
 #' @param x Input time series as a numeric vector
-#' @param dates Dates in a date format
+#' @param dates a vector of class "Date", containing the data dates
 #' @param r Defines the rate of decay of the weights. Should be between zero and one. By default is set to 0.8.
 #' @param auto.ao.seacrh Boolean. Search for additive outliers
 #' @param ao.list Vector with user specified additive outliers in a date format
