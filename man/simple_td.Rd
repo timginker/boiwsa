@@ -9,11 +9,27 @@ simple_td(dates, df.td)
 \arguments{
 \item{dates}{a vector of class "Date", containing the data dates}
 
-\item{df.td}{dataframe with working days. See, for example, dates_il}
+\item{df.td}{dataframe with working days. Its should consit of 2 columns named as "date" and "WORKING_DAY_PART". date column should be of class "Date". WORKING_DAY_PART should be similar to ISR_WORKING_DAY_PART in dates_il}
 }
 \value{
 matrix with trading day variables
 }
 \description{
 Generate simple trading day variable
+}
+\examples{
+
+data(dates_il)
+data(gasoline.data)
+
+dates_il\%>\%
+  dplyr::select(DATE_VALUE,ISR_WORKING_DAY_PART)\%>\%
+  `colnames<-`(c("date","WORKING_DAY_PART"))\%>\%
+  dplyr::mutate(date=as.Date(date))->df.td
+
+td=simple_td(dates = gasoline.data$date,df.td = df.td)
+
+
+
+
 }

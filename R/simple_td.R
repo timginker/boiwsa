@@ -1,10 +1,25 @@
 #' Generate simple trading day variable
 #'
 #' @param dates a vector of class "Date", containing the data dates
-#' @param df.td dataframe with working days. See, for example, dates_il
+#' @param df.td dataframe with working days. Its should consit of 2 columns named as "date" and "WORKING_DAY_PART". date column should be of class "Date". WORKING_DAY_PART should be similar to ISR_WORKING_DAY_PART in dates_il
 #'
 #' @return matrix with trading day variables
 #' @export
+#'
+#' @examples
+#'
+#' data(dates_il)
+#' data(gasoline.data)
+#'
+#' dates_il%>%
+#'   dplyr::select(DATE_VALUE,ISR_WORKING_DAY_PART)%>%
+#'   `colnames<-`(c("date","WORKING_DAY_PART"))%>%
+#'   dplyr::mutate(date=as.Date(date))->df.td
+#'
+#' td=simple_td(dates = gasoline.data$date,df.td = df.td)
+#'
+#'
+#'
 #'
 simple_td <- function(dates,df.td) {
 
@@ -24,7 +39,7 @@ simple_td <- function(dates,df.td) {
     dplyr::filter(date>=start.date,date<=end.date)
 
 
-  df3$t=(df3$ISR_WORKING_DAY_PART==1)*1
+  df3$t=(df3$WORKING_DAY_PART==1)*1
 
 
 
