@@ -376,6 +376,10 @@ boiwsa=function(x,dates,r=0.8,auto.ao.seacrh=T,ao.list=NULL,my.k_l=NULL,H=NULL,i
 
     auto.ao=find_outliers(y=y,dates=dates,H = H,my.AO.list = ao.list)
 
+  }else{
+
+    auto.ao=NULL
+
   }
 
   if (length(auto.ao$ao)>0) {
