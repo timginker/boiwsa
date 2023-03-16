@@ -621,9 +621,12 @@ boiwsa=function(x,dates,r=0.8,auto.ao.seacrh=T,ao.list=NULL,my.k_l=NULL,H=NULL,i
 
         out.factors[n.i]=(Xs[,(ncol(X)+ncol(H)+1):ncol(Xs)]%*%beta[(ncol(X)+ncol(H)+1):ncol(Xs)])[n.i]
 
+      }else{
+
+        out.factors[n.i]=(as.matrix(Xs[,(ncol(X)+1):ncol(Xs)])%*%as.matrix(beta[(ncol(X)+1):ncol(Xs)]))[n.i]
       }
 
-      out.factors[n.i]=(as.matrix(Xs[,(ncol(X)+1):ncol(Xs)])%*%as.matrix(beta[(ncol(X)+1):ncol(Xs)]))[n.i]
+
 
 
     }else{
