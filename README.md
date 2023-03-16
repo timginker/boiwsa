@@ -35,7 +35,7 @@ n_{t}^{y}})+\beta _{k}^{y}\cos (\frac{2\pi kD_{t}^{y}}{n_{t}^{y}})\right) +
 
 where $D_{t}^{y}$ and $D_{t}^{m}$ are the day of the year and the day of
 the month, and $n_{t}^{y}$ and $n_{t}^{m}$ are the number of days in the
-given month or year. Thus, the seasonal adjustment procedure takes into
+given year or month. Thus, the seasonal adjustment procedure takes into
 account the existence of two cycles, namely intrayearly and
 intramonthly.
 
