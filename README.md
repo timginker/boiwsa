@@ -42,6 +42,39 @@ intramonthly.
 The trend component is extracted with Friedman’s SuperSmoother using
 `stats::supsmu()`.
 
+Like the X-11 method (Ladiray and Quenneville, 2001), the `boiwsa`
+procedure uses an iterative principle to estimate the various
+components. The seasonal adjustment algorithm comprises eight steps,
+which are documented below:
+
+-   Step 1: Estimation of trend ($T_{t}^{(1)}$) using `stats::supsmu()`.
+
+-   Step 2: Estimation of the Seasonal-Irregular component:
+
+$$y_{t}-T_{t}^{(1)}=S_{t}+H_{t}+O_{t}+I_{t}$$
+
+-   Step 2\*: Searching for additive outliers
+
+-   Step 2\*\*: Identifying the optimal number of trigonometric
+    variables
+
+-   Step 3: Computing seasonal factors (and possibly other factors as
+    $H_{t}$ or $O_{t}$) using WLS. In this version, for each year $t$
+    and the observation year $\tau$ we use a simple geometrically
+    decaying weight function $w_{t}=r^{|t-\tau|}$, where $r \in (0,1]$.
+
+-   Step 4: Estimation of trend ($T_{t}^{(2)}$) from seasonally and
+    outlier adjusted series using `stats::supsmu()`
+
+-   Step 5: Estimation of the Seasonal-Irregular component:
+    $$y_{t}-T_{t}^{(2)}=S_{t}+H_{t}+O_{t}+I_{t}$$
+
+-   Step 6: Computing the final seasonal factors (and possibly other
+    factors as \$ H\_{t}\$ or $O_{t}$) using WLS.
+
+-   Step 7: Estimation of the final seasonally adjusted series:
+    $$y_{t}-S_{t}-H_{t}$$
+
 ## Installation
 
 To install boiwsa, you can use devtools:
@@ -91,7 +124,8 @@ dates argument takes the associated dates in date format. Unless
 specified otherwise (i.e., `my.k_l = NULL`), the procedure automatically
 identifies the best number of trigonometric variables to capture the
 yearly ($K$) and monthly ($L$) cycles based on the AICc. The information
-criterion is specified by the `ic` option.
+criterion is specified by the `ic` option. The weighting decay rate is
+specified by `r` (by default `r=0.8`).
 
 The procedure automatically searches for additive outliers (AO) using
 the method described in Appendix C of Findley et al. (1998). To disable
@@ -138,6 +172,9 @@ Findley, D.F., Monsell, B.C., Bell, W.R., Otto, M.C. and B.C Chen
 (1998). New capabilities and methods of the X-12-ARIMA
 seasonal-adjustment program. Journal of Business & Economic Statistics,
 16(2), pp.127-152.
+
+Ladiray, D. and B. Quenneville (2001). Seasonal adjustment with the X-11
+method.
 
 # Disclaimer
 
