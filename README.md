@@ -75,6 +75,9 @@ $$y_{t}-T_{t}^{(1)}=S_{t}+H_{t}+O_{t}+I_{t}$$
 -   Step 7: Estimation of the final seasonally adjusted series:
     $$y_{t}-S_{t}-H_{t}$$
 
+-   Step 8: Computing final trend ($T_{t}^{(3)}$) estimate from
+    seasonally and outlier adjusted series using `stats::supsmu()`.
+
 ## Installation
 
 To install boiwsa, you can use devtools:
