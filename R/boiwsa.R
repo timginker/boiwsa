@@ -228,6 +228,10 @@ boiwsa=function(x,dates,r=0.8,auto.ao.seacrh=T,ao.list=NULL,my.k_l=NULL,H=NULL,i
 
       if (is.null(my.AO.list)) {
         AO=NULL
+      }else{
+
+        AO=my_ao(dates=dates,out.list =my.AO.list )
+
       }
 
       opt=find_opt(y = y, dates = dates,H = H, AO = AO)
