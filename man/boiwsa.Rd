@@ -9,6 +9,7 @@ boiwsa(
   dates,
   r = 0.8,
   auto.ao.seacrh = T,
+  out.tolerance = 3.8,
   ao.list = NULL,
   my.k_l = NULL,
   H = NULL,

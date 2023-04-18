@@ -31,7 +31,16 @@
 #'  data("gasoline.data")
 #'  res=boiwsa(x=gasoline.data$y,dates=gasoline.data$date) # Seasonal adjustment using automatic model selection
 
-boiwsa=function(x,dates,r=0.8,auto.ao.seacrh=T,ao.list=NULL,my.k_l=NULL,H=NULL,ic="aicc",method="additive"){
+boiwsa=function(x,
+                dates,
+                r=0.8,
+                auto.ao.seacrh=T,
+                out.tolerance=3.8,
+                ao.list=NULL,
+                my.k_l=NULL,
+                H=NULL,
+                ic="aicc",
+                method="additive"){
   ############
   # Arguments:
   ############
@@ -216,7 +225,7 @@ boiwsa=function(x,dates,r=0.8,auto.ao.seacrh=T,ao.list=NULL,my.k_l=NULL,H=NULL,i
 
   #----------------------------------------------#
 
-  find_outliers=function(y,dates,out.tolerance=3.8,my.AO.list=NULL,H=NULL,my.k_l=NULL){
+  find_outliers=function(y,dates,out.tolerance=out.tolerance,my.AO.list=NULL,H=NULL,my.k_l=NULL){
 
     # y -detrended variable
     # out.tolerance - t-stat threshold
