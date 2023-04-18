@@ -10,6 +10,7 @@
 #' @param dates a vector of class "Date", containing the data dates
 #' @param r Defines the rate of decay of the weights. Should be between zero and one. By default is set to 0.8.
 #' @param auto.ao.seacrh Boolean. Search for additive outliers
+#' @param out.threshold t-stat threshold in outlier search. By default is 3.8
 #' @param ao.list Vector with user specified additive outliers in a date format
 #' @param my.k_l Numeric vector defining the number of yearly and monthly trigonometric variables. If NULL, is found automatically using the information criteria
 #' @param H Matrix with holiday- and trading day factors
@@ -35,7 +36,7 @@ boiwsa=function(x,
                 dates,
                 r=0.8,
                 auto.ao.seacrh=T,
-                out.tolerance=3.8,
+                out.threshold=3.8,
                 ao.list=NULL,
                 my.k_l=NULL,
                 H=NULL,
@@ -225,7 +226,12 @@ boiwsa=function(x,
 
   #----------------------------------------------#
 
-  find_outliers=function(y,dates,out.tolerance=out.tolerance,my.AO.list=NULL,H=NULL,my.k_l=NULL){
+  find_outliers=function(y,
+                         dates,
+                         out.tolerance=out.threshold,
+                         my.AO.list=NULL,
+                         H=NULL,
+                         my.k_l=NULL){
 
     # y -detrended variable
     # out.tolerance - t-stat threshold
@@ -316,7 +322,15 @@ boiwsa=function(x,
     # Backward deletion
 
 
-    if(length(f.sel.pos)>0){run=T}
+    if(length(f.sel.pos)>0){
+
+      run=T
+
+    }else{
+
+      f.sel.ao.dates=NULL
+
+      }
 
 
 
@@ -355,8 +369,15 @@ boiwsa=function(x,
 
     }
 
+    if(length(f.sel.ao.dates)==0){
 
-    f.sel.ao.dates=f.sel.ao.dates[order(f.sel.ao.dates)]
+      f.sel.ao.dates=NULL
+    }else{
+
+      f.sel.ao.dates=f.sel.ao.dates[order(f.sel.ao.dates)]
+    }
+
+
 
     return(list(ao=f.sel.ao.dates,my.k_l=my.k_l))
 
