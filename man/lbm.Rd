@@ -3,14 +3,14 @@
 \docType{data}
 \name{lbm}
 \alias{lbm}
-\title{Initial unemployment claims in Israel (adjusted for strikes)}
+\title{Weekly number of initial registrations in Israeli Employment Services (adjusted for strikes)}
 \format{
 \subsection{Data.Frame}{
 
 A data frame with 313 rows and 2 columns:
 \describe{
 \item{date}{date in a date format}
-\item{IES_IN_W_ADJ}{Initial unemployment claims}
+\item{IES_IN_W_ADJ}{number of initial registrations}
 }
 }
 }
