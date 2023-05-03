@@ -34,3 +34,15 @@
 #' @source Personal
 "holiday_dates_il"
 
+#' Initial unemployment claims in Israel (adjusted for strikes)
+#'
+#' Weekly data beginning 11 January 2014, ending 4 January 2020.
+#'
+#' @format ## Data.Frame
+#' A data frame with 313 rows and 2 columns:
+#' \describe{
+#'   \item{date}{date in a date format}
+#'   \item{IES_IN_W_ADJ}{Initial unemployment claims}
+#' }
+#' @source Internal
+"lbm"
