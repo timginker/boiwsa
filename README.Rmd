@@ -34,13 +34,15 @@ seasonal, outlier, holiday- and trading-day, and irregular components,
 respectively. The seasonal component is modeled as
 
 
-$$\begin{eqnarray*}
+$$
+\begin{eqnarray*}
 S_{t} &=&\sum_{k=1}^{K}\left( \alpha _{k}^{y}\sin (\frac{2\pi kD_{t}^{y}}{
 n_{t}^{y}})+\beta _{k}^{y}\cos (\frac{2\pi kD_{t}^{y}}{n_{t}^{y}})\right) +
 \\
 &&\sum_{l=1}^{L}\left( \alpha _{l}^{m}\sin (\frac{2\pi kD_{t}^{m}}{n_{t}^{m}}
 )+\beta _{l}^{m}\cos (\frac{2\pi kD_{t}^{m}}{n_{t}^{m}})\right) ,
-\end{eqnarray*}$$
+\end{eqnarray*}
+$$
 
 
 where $D_{t}^{y}$ and $D_{t}^{m}$ are the day of the year and the day of the
