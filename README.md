@@ -25,7 +25,7 @@ where $T_{t}$, $S_{t}$ , $O_{t},$ $H_{t}$ and $I_{t}$ represent the
 trend, seasonal, outlier, holiday- and trading-day, and irregular
 components, respectively. The seasonal component is modeled as
 
-$$
+```math
 \begin{eqnarray*}
 S_{t} &=&\sum_{k=1}^{K}\left( \alpha _{k}^{y}\sin (\frac{2\pi kD_{t}^{y}}{
 n_{t}^{y}})+\beta _{k}^{y}\cos (\frac{2\pi kD_{t}^{y}}{n_{t}^{y}})\right) +
@@ -33,7 +33,7 @@ n_{t}^{y}})+\beta _{k}^{y}\cos (\frac{2\pi kD_{t}^{y}}{n_{t}^{y}})\right) +
 &&\sum_{l=1}^{L}\left( \alpha _{l}^{m}\sin (\frac{2\pi kD_{t}^{m}}{n_{t}^{m}}
 )+\beta _{l}^{m}\cos (\frac{2\pi kD_{t}^{m}}{n_{t}^{m}})\right) ,
 \end{eqnarray*}
-$$
+```
 
 where $D_{t}^{y}$ and $D_{t}^{m}$ are the day of the year and the day of
 the month, and $n_{t}^{y}$ and $n_{t}^{m}$ are the number of days in the
