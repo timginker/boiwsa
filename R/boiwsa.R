@@ -699,7 +699,9 @@ boiwsa=function(x,
 
   }
 
-  m=lm(y~Xs-1)
+  lm.data=as.data.frame(cbind(y,Xs))
+
+  m=lm(y~.-1,data=lm.data)
 
   #my.k_l=as.data.frame(my.k_l)
 
