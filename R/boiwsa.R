@@ -653,7 +653,7 @@ boiwsa=function(x,
 
       if (!is.null(H)) {
 
-        out.factors[n.i]=(Xs[,(ncol(X)+ncol(H)+1):ncol(Xs)]%*%beta[(ncol(X)+ncol(H)+1):ncol(Xs)])[n.i]
+        out.factors[n.i]=(Xs[,(ncol(X)+ncol(H)+1):ncol(Xs)]%*%as.matrix(beta[(ncol(X)+ncol(H)+1):ncol(Xs)]))[n.i]
 
       }else{
 
