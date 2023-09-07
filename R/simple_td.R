@@ -1,5 +1,9 @@
 #' Generate simple trading day variable
 #'
+#' @import lubridate
+#' @import dplyr
+#' @import tidyr
+#'
 #' @param dates a vector of class "Date", containing the data dates
 #' @param df.td dataframe with working days. Its should consit of 2 columns named as "date" and "WORKING_DAY_PART". date column should be of class "Date". WORKING_DAY_PART should be similar to ISR_WORKING_DAY_PART in dates_il
 #'
