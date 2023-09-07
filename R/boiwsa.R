@@ -4,7 +4,6 @@
 #' @import zoo
 #' @importFrom Hmisc yearDays
 #' @import MuMIn
-#' @import tidyverse
 #'
 #' @param x Input time series as a numeric vector
 #' @param dates a vector of class "Date", containing the data dates
