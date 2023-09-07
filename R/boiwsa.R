@@ -3,6 +3,7 @@
 #' @import lubridate
 #' @import zoo
 #' @importFrom Hmisc yearDays
+#' @importFrom stats AIC BIC lm median supsmu
 #' @import MuMIn
 #'
 #' @param x Input time series as a numeric vector
@@ -29,7 +30,7 @@
 #'  # Seasonal adjustment of weekly US gasoline production
 #'
 #'  data("gasoline.data")
-#'  res=boiwsa(x=gasoline.data$y,dates=gasoline.data$date) # Seasonal adjustment using automatic model selection
+#'  res=boiwsa(x=gasoline.data$y,dates=gasoline.data$date)
 
 boiwsa=function(x,
                 dates,

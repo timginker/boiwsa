@@ -2,6 +2,9 @@
 #'
 #' AR spectrum of the (detrended) original and seasonally adjusted data. Computed using [`stats::spec.ar()`] with order set to 60.
 #'
+#' @importFrom graphics abline legend lines
+#' @importFrom stats spec.ar
+#'
 #' @param x boiwsa results
 #'
 #' @return AR spectrum plot
@@ -9,7 +12,7 @@
 #'
 #' @examples
 #' # Seasonal adjustment of weekly US gasoline production
-#' res=boiwsa(x=gasoline.data$y,dates=gasoline.data$date) # Seasonal adjustment using automatic model selection
+#' res=boiwsa(x=gasoline.data$y,dates=gasoline.data$date)
 #' plot_spec(res)
 #'
 plot_spec=function(x){

@@ -17,7 +17,7 @@ AR spectrum of the (detrended) original and seasonally adjusted data. Computed u
 }
 \examples{
 # Seasonal adjustment of weekly US gasoline production
-res=boiwsa(x=gasoline.data$y,dates=gasoline.data$date) # Seasonal adjustment using automatic model selection
+res=boiwsa(x=gasoline.data$y,dates=gasoline.data$date)
 plot_spec(res)
 
 }
