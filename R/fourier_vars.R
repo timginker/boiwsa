@@ -2,13 +2,22 @@
 #'
 #' Creates sine and cosine variables to capture intramonthly and intrayearly cycles.
 #'
+#' @importFrom Hmisc yearDays
+#' @importFrom lubridate days_in_month day yday
+#'
 #' @param k Number of yearly cycle fourier terms
 #' @param l Number of monthly cycle fourier terms
 #' @param dates Vector of dates in a date format
 #'
 #' @return Matrix with fourier variables
-#' @author Tim Ginker
 #' @export
+#'
+#' @examples
+#'
+#' # create a vector of dates
+#' dates=seq.Date(from=as.Date("2023-01-02"),by="weeks",length.out = 100)
+#' # Create a matrix with 20 yearly and 6 monthly pairs of sine and cosine variables
+#' X=fourier_vars(k=20,l=6,dates=dates)
 #'
 fourier_vars=function(k=1,l=1,dates){
 

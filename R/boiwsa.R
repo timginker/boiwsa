@@ -117,15 +117,15 @@ boiwsa=function(x,
         X=cbind(X,H,AO)
 
         if(is.null(X)){
-          m=lm(y~-1)
-        }else{m=lm(y~X-1)}
+          m=stats::lm(y~-1)
+        }else{m=stats::lm(y~X-1)}
 
 
 
 
-        aic0[i,j]=AIC(m)
+        aic0[i,j]=stats::AIC(m)
         aicc0[i,j]=MuMIn::AICc(m)
-        bic0[i,j]=BIC(m)
+        bic0[i,j]=stats::BIC(m)
 
       }
 
@@ -262,7 +262,7 @@ boiwsa=function(x,
 
     err=y-Xs%*%solve(t(Xs)%*%Xs)%*%t(Xs)%*%y
 
-    sig_R=1.49*median(abs(err))
+    sig_R=1.49*stats::median(abs(err))
 
 
 
@@ -347,7 +347,7 @@ boiwsa=function(x,
 
       err=y-Xst%*%solve(t(Xst)%*%Xst)%*%t(Xst)%*%y
 
-      sig_R=1.49*median(abs(err))
+      sig_R=1.49*stats::median(abs(err))
 
       Tt=abs((solve(t(Xst)%*%Xst)%*%t(Xst)%*%y)/(diag(solve((t(Xst)%*%Xst))*sig_R^2)^0.5))[(ncol(Xst)-length(f.sel.ao.dates)+1):ncol(Xst)]
 

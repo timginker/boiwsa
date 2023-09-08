@@ -4,7 +4,16 @@
 \alias{find_opt}
 \title{Find optimal number of fourier variables}
 \usage{
-find_opt(x, dates, H = NULL, AO = NULL, method = "additive")
+find_opt(
+  x,
+  dates,
+  H = NULL,
+  AO = NULL,
+  method = "additive",
+  l.max = 24,
+  k.max = 42,
+  by = 6
+)
 }
 \arguments{
 \item{x}{Numeric vector. Time series to seasonally adjust}
@@ -16,10 +25,24 @@ find_opt(x, dates, H = NULL, AO = NULL, method = "additive")
 \item{AO}{(optional) Matrix with additive outlier variables}
 
 \item{method}{Decomposition method: "additive" or "multiplicative". By default uses the additive method}
+
+\item{l.max}{maximal number of the monthly cycle variables to search for}
+
+\item{k.max}{maximal number of the yearly cycle variables to search for}
+
+\item{by}{step size in the search}
 }
 \value{
-list with the optimal number of fourier terms according to AIC, AICc and BIC
+list with the optimal number of (yearly and monthly) fourier variables according to AIC, AICc and BIC
 }
 \description{
 Searches through the model space to identify the best number of trigonometric variables, with the lowest AIC, AICc or BIC value.
+}
+\examples{
+
+data(gasoline.data)
+
+res=find_opt(x=gasoline.data$y,dates=gasoline.data$date)
+print(res)
+
 }
