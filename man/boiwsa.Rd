@@ -57,10 +57,11 @@ boiwsa(
 Seasonal adjustment of weekly data
 }
 \examples{
+ \dontrun{
  # Seasonal adjustment of weekly US gasoline production
 
  data("gasoline.data")
- res=boiwsa(x=gasoline.data$y,dates=gasoline.data$date)
+ res=boiwsa(x=gasoline.data$y,dates=gasoline.data$date)}
 }
 \author{
 Tim Ginker

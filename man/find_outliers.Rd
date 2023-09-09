@@ -40,9 +40,10 @@ If the number of trigonometric variables is not specified will search automatica
 }
 \examples{
 
+\dontrun{
 # Searching for additive outliers in Gasoline data
 data(gasoline.data)
-ao_list=find_outliers(x=gasoline.data$y,dates = gasoline.data$date)
+ao_list=find_outliers(x=gasoline.data$y,dates = gasoline.data$date)}
 
 }
 \references{

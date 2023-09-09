@@ -16,8 +16,9 @@ AR spectrum plot
 AR spectrum of the (detrended) original and seasonally adjusted data. Computed using \code{\link[stats:spec.ar]{stats::spec.ar()}} with order set to 60.
 }
 \examples{
+\dontrun{
 # Seasonal adjustment of weekly US gasoline production
 res=boiwsa(x=gasoline.data$y,dates=gasoline.data$date)
-plot_spec(res)
+plot_spec(res)}
 
 }

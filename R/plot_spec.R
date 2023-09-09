@@ -11,9 +11,10 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' # Seasonal adjustment of weekly US gasoline production
 #' res=boiwsa(x=gasoline.data$y,dates=gasoline.data$date)
-#' plot_spec(res)
+#' plot_spec(res)}
 #'
 plot_spec=function(x){
 
