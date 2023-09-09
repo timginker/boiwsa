@@ -254,6 +254,8 @@ boiwsa=function(x,
 
     }
 
+    if(sum(opt$opt.aicc)>0){
+
     X=fourier_vars(k=my.k_l[1],l=my.k_l[2],dates = dates)
 
 
@@ -381,6 +383,12 @@ boiwsa=function(x,
     return(list(ao=f.sel.ao.dates,my.k_l=my.k_l))
 
 
+    }else{
+
+      return(list(ao=NULL,my.k_l=my.k_l))
+    }
+
+
 
   }
 
@@ -457,6 +465,8 @@ boiwsa=function(x,
 
 
   }
+
+  if(sum(my.k_l>0)){
 
   X=fourier_vars(k=my.k_l[1],l=my.k_l[2],dates = dates)
 
@@ -721,7 +731,10 @@ boiwsa=function(x,
               ao.list=lubridate::as_date(ao.list)))
 
 
+  }else{
 
+    print("Series should not be a candidate for seasonal adjustment because automatic selection found k=l=0")
+}
 
 
 }
