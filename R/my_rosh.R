@@ -1,5 +1,7 @@
 #' Internal function for a specific application
 #'
+#' Creates a dummy moving holiday variable for the weekly number of initial registrations at the Employment Service in Israel.
+#'
 #'
 #' @import lubridate
 #' @import dplyr

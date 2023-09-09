@@ -19,7 +19,7 @@ my_rosh(dates, holiday.dates, start = -11, end = 12)
 rosh holiday variable
 }
 \description{
-Internal function for a specific application
+Creates a dummy moving holiday variable for the weekly number of initial registrations at the Employment Service in Israel.
 }
 \examples{
 

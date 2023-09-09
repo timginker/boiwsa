@@ -2,7 +2,7 @@
 % Please edit documentation in R/simple_td.R
 \name{simple_td}
 \alias{simple_td}
-\title{Generate simple trading day variable}
+\title{Generate simple working day variable}
 \usage{
 simple_td(dates, df.td)
 }
@@ -15,7 +15,7 @@ simple_td(dates, df.td)
 matrix with trading day variables
 }
 \description{
-Generate simple trading day variable
+Aggregates the count of full working days within a week and normalizes it.
 }
 \examples{
 

@@ -1,4 +1,6 @@
-#' Generate simple trading day variable
+#' Generate simple working day variable
+#'
+#' Aggregates the count of full working days within a week and normalizes it.
 #'
 #' @import lubridate
 #' @import dplyr
