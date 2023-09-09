@@ -2,7 +2,7 @@
 % Please edit documentation in R/my_rosh.R
 \name{my_rosh}
 \alias{my_rosh}
-\title{Internal function for a specific series}
+\title{Internal function for a specific application}
 \usage{
 my_rosh(dates, holiday.dates, start = -11, end = 12)
 }
@@ -19,5 +19,13 @@ my_rosh(dates, holiday.dates, start = -11, end = 12)
 rosh holiday variable
 }
 \description{
-Internal function for a specific series
+Internal function for a specific application
+}
+\examples{
+
+# Creating moving holiday dummy variable for Israeli Rosh Hashanah
+data(gasoline.data)
+data(holiday_dates_il) # dates of Israeli Rosh Hashanah and Pesach
+movehol=my_rosh(gasoline.data$date,holiday.dates = holiday_dates_il$rosh)
+
 }

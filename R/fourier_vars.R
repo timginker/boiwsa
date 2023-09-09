@@ -5,8 +5,8 @@
 #' @importFrom Hmisc yearDays
 #' @importFrom lubridate days_in_month day yday
 #'
-#' @param k Number of yearly cycle fourier terms
-#' @param l Number of monthly cycle fourier terms
+#' @param k Number of pairs of the yearly cycle trigonometric variables
+#' @param l Number of pairs of the monthly cycle trigonometric variables
 #' @param dates Vector of dates in a date format
 #'
 #' @return Matrix with fourier variables

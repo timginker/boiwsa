@@ -15,8 +15,7 @@ Imports:
     lubridate,
     MuMIn,
     stats,
-    tidyr,
-    zoo
+    tidyr
 LazyData: true
 Depends: 
     R (>= 2.10)

@@ -7,9 +7,9 @@
 fourier_vars(k = 1, l = 1, dates)
 }
 \arguments{
-\item{k}{Number of yearly cycle fourier terms}
+\item{k}{Number of pairs of the yearly cycle trigonometric variables}
 
-\item{l}{Number of monthly cycle fourier terms}
+\item{l}{Number of pairs of the monthly cycle trigonometric variables}
 
 \item{dates}{Vector of dates in a date format}
 }

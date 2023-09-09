@@ -8,6 +8,17 @@
 #' @return AO matrix with outlier variables
 #' @export
 #'
+#' @examples
+#'
+#' # create a sequence of dates
+#' dates=seq.Date(from=as.Date("2023-01-02"),by="weeks",length.out = 100)
+#' # create a vector of outlier dates
+#' my_ao_dates=as.Date(c("2023-01-02","2023-01-03"))
+#' # create a matrix of AO variables
+#' my_ao(dates = dates,out.list = my_ao_dates)
+#' # as you can see there is only one column corresponding to 2023-01-02,
+#' # the second date is ignored because it is not present in the dates vector
+#'
 my_ao=function(dates,out.list) {
 
   # checking that the dates in out.list are in the data, and removing them if not

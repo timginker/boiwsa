@@ -1,4 +1,9 @@
-#' Internal function for a specific series
+#' Internal function for a specific application
+#'
+#'
+#' @import lubridate
+#' @import dplyr
+#' @importFrom tidyr fill
 #'
 #' @param dates a vector of class "Date", containing the data dates
 #' @param holiday.dates a vector of class "Date", containing the occurrences of the holiday. It can be generated with as.Date().
@@ -7,6 +12,13 @@
 #'
 #' @return rosh holiday variable
 #' @export
+#'
+#' @examples
+#'
+#' # Creating moving holiday dummy variable for Israeli Rosh Hashanah
+#' data(gasoline.data)
+#' data(holiday_dates_il) # dates of Israeli Rosh Hashanah and Pesach
+#' movehol=my_rosh(gasoline.data$date,holiday.dates = holiday_dates_il$rosh)
 #'
 
 my_rosh=function(dates,holiday.dates,start=-11,end=12){

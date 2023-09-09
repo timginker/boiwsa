@@ -25,7 +25,7 @@ find_outliers(
 
 \item{H}{(optional) Matrix with holiday and trading day variables}
 
-\item{my.k_l}{(optional) Vector with the number of fourier terms to capture the yearly and monthly cycle. If NULL, would perform automatic search}
+\item{my.k_l}{(optional) Vector with the number of fourier terms to capture the yearly and monthly cycle. If NULL, would perform automatic search using AICc criterion}
 
 \item{method}{Decomposition method: "additive" or "multiplicative". By default uses the additive method}
 }
@@ -37,6 +37,13 @@ ao list of AO dates
 \description{
 Searches for additive outliers using the method described in Appendix C of Findley et al. (1998).
 If the number of trigonometric variables is not specified will search automatically through the model space to identify the best number of trigonometric variables, with the lowest AIC, AICc or BIC value.
+}
+\examples{
+
+# Searching for additive outliers in Gasoline data
+data(gasoline.data)
+ao_list=find_outliers(x=gasoline.data$y,dates = gasoline.data$date)
+
 }
 \references{
 Findley, D.F., Monsell, B.C., Bell, W.R., Otto, M.C. and B.C Chen (1998). New capabilities and methods of the X-12-ARIMA seasonal-adjustment program. Journal of Business & Economic Statistics, 16(2), pp.127-152.

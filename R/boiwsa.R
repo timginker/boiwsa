@@ -1,7 +1,6 @@
 #' Seasonal adjustment of weekly data
 #'
 #' @import lubridate
-#' @import zoo
 #' @importFrom Hmisc yearDays
 #' @importFrom stats AIC BIC lm median supsmu
 #' @import MuMIn
