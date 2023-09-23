@@ -4,6 +4,9 @@
 # boiwsa
 
 <!-- badges: start -->
+
+[![Github All
+Releases](https://img.shields.io/github/downloads/timginker/boiwsa/total.svg)]()
 <!-- badges: end -->
 
 `boiwsa` is an R package for performing weekly seasonal adjustment on
