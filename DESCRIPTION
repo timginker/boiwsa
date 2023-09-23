@@ -1,10 +1,13 @@
 Package: boiwsa
+Type: Package
 Title: Seasonal Adjustment of Weekly Data
-Version: 1.0.0.9000
+Version: 1.0.0
 Authors@R: 
-    person("Tim", "Ginker", , "tim.ginker@gmail.com", role = c("aut", "cre", "cph"),
+    person("Tim", "Ginker", email ="tim.ginker@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0002-7138-5417"))
-Description: Perform seasonal adjustment of weekly data. The package offers a      user-friendly interface for computing seasonally adjusted estimates of weekly data and also     includes diagnostic tools to assess the quality of the adjustments. Furthermore, it    incorporates tools uniquely tailored to the specific characteristics of Israeli data.
+Author: Tim Ginker [aut, cre, cph] (<https://orcid.org/0000-0002-7138-5417>)
+Maintainer: Tim Ginker <tim.ginker@gmail.com>           
+Description: Perform seasonal adjustment of weekly data. The package offers a user-friendly interface for computing seasonally adjusted estimates of weekly data and also includes diagnostic tools to assess the quality of the adjustments. Furthermore, it incorporates tools uniquely tailored to the specific characteristics of Israeli data.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
