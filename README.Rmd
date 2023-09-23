@@ -16,7 +16,6 @@ knitr::opts_chunk$set(
 # boiwsa
 
 <!-- badges: start -->
-[![Github All Releases](https://img.shields.io/github/downloads/timginker/boiwsa/total.svg)]()
 <!-- badges: end -->
 
 `boiwsa` is an R package for performing weekly seasonal adjustment on time series data. It provides a simple, easy-to-use interface for calculating seasonally adjusted estimates of weekly data, as well as a number of diagnostic tools for evaluating the quality of the adjustments.
