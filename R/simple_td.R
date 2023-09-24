@@ -4,7 +4,8 @@
 #'
 #' @import lubridate
 #' @import dplyr
-#' @import tidyr
+#' @importFrom tidyr fill
+#' @importFrom rlang .data
 #'
 #' @param dates a vector of class "Date", containing the data dates
 #' @param df.td dataframe with working days. Its should consit of 2 columns named as "date" and "WORKING_DAY_PART". date column should be of class "Date". WORKING_DAY_PART should be similar to ISR_WORKING_DAY_PART in dates_il
@@ -39,7 +40,7 @@ simple_td <- function(dates,df.td) {
   df2=merge(df0,df1,by="date",all = T)
 
   df2%>%
-    tidyr::fill(weekly,.direction = "up")->df2
+    tidyr::fill("weekly",.direction = "up")->df2
 
 
   df3=merge(df2,df.td,by="date",all=T)%>%
@@ -51,8 +52,8 @@ simple_td <- function(dates,df.td) {
 
 
   df3%>%
-    dplyr::select(weekly,t)%>%
-    dplyr::group_by(weekly)%>%
+    dplyr::select("weekly","t")%>%
+    dplyr::group_by(.data$weekly)%>%
     dplyr::summarise(t=sum(t))->df3
 
 

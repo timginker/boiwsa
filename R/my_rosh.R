@@ -6,6 +6,7 @@
 #' @import lubridate
 #' @import dplyr
 #' @importFrom tidyr fill
+#' @importFrom rlang .data
 #'
 #' @param dates a vector of class "Date", containing the data dates
 #' @param holiday.dates a vector of class "Date", containing the occurrences of the holiday. It can be generated with as.Date().
@@ -34,10 +35,9 @@ my_rosh=function(dates,holiday.dates,start=-11,end=12){
 
   df2=merge(df0,df1,by="date",all = T)
 
-  df2%>%tidyr::fill(weekly,.direction = "up")->df2
+  df2%>%tidyr::fill("weekly",.direction = "up")->df2
 
-  df2%>%
-    dplyr::mutate(hag=0)->df2
+  df2$hag=0
 
   for (i in 1:length(holiday.dates)) {
 
@@ -49,9 +49,9 @@ my_rosh=function(dates,holiday.dates,start=-11,end=12){
 
 
   df2%>%
-    dplyr::select(weekly,hag)%>%
-    dplyr::group_by(weekly)%>%
-    dplyr::summarise(t=sum(hag))->df3
+    dplyr::select("weekly","hag")%>%
+    dplyr::group_by(.data$weekly)%>%
+    dplyr::summarise(t=sum(.data$hag))->df3
 
   df3[df3$t>0,"t"]=1
 

@@ -11,7 +11,7 @@ genhol(dates, holiday.dates, start = 7, end = 7)
 
 \item{holiday.dates}{a vector of class "Date", containing the occurrences of the holiday. It can be generated with as.Date().}
 
-\item{start}{integer, shifts the start point of the holiday. Use negative values if start is before the specified date.}
+\item{start}{integer, shifts backwards the start point of the holiday. Use negative values if start is after the specified date.}
 
 \item{end}{integer, shifts end point of the holiday. Use negative values if end is before the specified date.}
 }
