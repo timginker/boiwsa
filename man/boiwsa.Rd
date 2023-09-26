@@ -8,7 +8,7 @@ boiwsa(
   x,
   dates,
   r = 0.8,
-  auto.ao.seacrh = T,
+  auto.ao.seacrh = TRUE,
   out.threshold = 3.8,
   ao.list = NULL,
   my.k_l = NULL,
@@ -57,9 +57,9 @@ boiwsa(
 Seasonal adjustment of weekly data
 }
 \examples{
- \dontrun{
+ # Not run
  # Seasonal adjustment of weekly US gasoline production
-
+ \donttest{
  data("gasoline.data")
  res=boiwsa(x=gasoline.data$y,dates=gasoline.data$date)}
 }

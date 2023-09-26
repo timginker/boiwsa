@@ -26,16 +26,16 @@
 #' @author Tim Ginker
 #' @export
 #' @examples
-#'  \dontrun{
+#'  # Not run
 #'  # Seasonal adjustment of weekly US gasoline production
-#'
+#'  \donttest{
 #'  data("gasoline.data")
 #'  res=boiwsa(x=gasoline.data$y,dates=gasoline.data$date)}
 
 boiwsa=function(x,
                 dates,
                 r=0.8,
-                auto.ao.seacrh=T,
+                auto.ao.seacrh=TRUE,
                 out.threshold=3.8,
                 ao.list=NULL,
                 my.k_l=NULL,
@@ -272,7 +272,7 @@ boiwsa=function(x,
 
     out.search.points=(1:length(dates))[!dates%in%my.AO.list]
 
-    run=T
+    run=TRUE
 
     while (run) {
 
@@ -314,7 +314,7 @@ boiwsa=function(x,
 
 
       if (max(Ts)<out.tolerance) {
-        run=F
+        run=FALSE
       }
 
 
@@ -326,7 +326,7 @@ boiwsa=function(x,
 
     if(length(f.sel.pos)>0){
 
-      run=T
+      run=TRUE
 
     }else{
 
@@ -360,12 +360,12 @@ boiwsa=function(x,
 
       }else{
 
-        run=F
+        run=FALSE
       }
 
       if(length(f.sel.ao.dates)==0){
 
-        run=F
+        run=FALSE
       }
 
 
@@ -734,7 +734,20 @@ boiwsa=function(x,
 
   }else{
 
-    print("Series should not be a candidate for seasonal adjustment because automatic selection found k=l=0")
+    message("Series should not be a candidate for seasonal adjustment because automatic selection found k=l=0")
+
+    return(list(sa=NULL,
+                my.k_l=c(0,0),
+                seasonal.factors=NULL,
+                hol.factors=NULL,
+                out.factors=NULL,
+                trend=NULL,
+                beta=NULL,
+                m=NULL,
+                x=x,
+                ao.list=NULL))
+
+
 }
 
 
