@@ -1,11 +1,8 @@
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 notes
 
 * This is a new release.
 
-* There is a number of spurious notes concerning undefined global functions or variables: hag and weekly. These are just dplyr selections of columns in a dataframe.
+* Examples running longer than 5s were wrapped in \donttest{}
 
-* Examples running more than 5s were wrapped in \dontrun{}
-
-* NEWS.md was amended

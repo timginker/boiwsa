@@ -29,12 +29,12 @@ plot_spec=function(x){
   abline(v=(1:2)/4.34, col="red",lwd=1.5,lty=2)
   abline(v=(1:3)/52.1775, col="black",lwd=1.5,lty=3)
   legend(
-    "topright",
+    "bottomleft",
     legend = c("monthly peaks", "yearly peaks","original","SA"),
     lwd = c(2,2,2,2),
     lty=c(2,3,1,1),
     col = c("red", "black","darkgrey","royalblue"),
-    bty = "n"
+    bty = "n",inset = c( 0.5, 0.6)
   )
 
 
