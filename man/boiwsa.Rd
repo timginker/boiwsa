@@ -39,19 +39,19 @@ boiwsa(
 \item{method}{Decomposition type: additive or multiplicative}
 }
 \value{
-{sa} {Seasonally adjusted series}
+{sa}{ Seasonally adjusted series}
 
-{my.k_l} {Number of trigonometric variables used to model the seasonal pattern}
+{my.k_l}{ Number of trigonometric variables used to model the seasonal pattern}
 
-{sf} {Estimated seasonal effects}
+{sf}{ Estimated seasonal effects}
 
-{hol.factors} {Estimated holiday effects}
+{hol.factors}{ Estimated holiday effects}
 
-{out.factors} {Estimated outlier effects}
+{out.factors}{ Estimated outlier effects}
 
-{beta} {Regression coefficients for the last year}
+{beta}{ Regression coefficients for the last year}
 
-{m} {lm object. Unweighted OLS regression on the full sample}
+{m}{ lm object. Unweighted OLS regression on the full sample}
 }
 \description{
 Seasonal adjustment of weekly data
