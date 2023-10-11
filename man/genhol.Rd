@@ -16,7 +16,7 @@ genhol(dates, holiday.dates, start = 7, end = 7)
 \item{end}{integer, shifts end point of the holiday. Use negative values if end is before the specified date.}
 }
 \value{
-an matrix with holiday variables that can be used as a user defined variable in boiwsa().
+a matrix with holiday variables that can be used as a user defined variable in boiwsa().
 }
 \description{
 Can be used to generate moving holiday regressors for the U. S. holidays of Easter,

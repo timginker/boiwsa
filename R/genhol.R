@@ -15,7 +15,7 @@
 #' @param start integer, shifts backwards the start point of the holiday. Use negative values if start is after the specified date.
 #' @param end integer, shifts end point of the holiday. Use negative values if end is before the specified date.
 #'
-#' @return an matrix with holiday variables that can be used as a user defined variable in boiwsa().
+#' @return a matrix with holiday variables that can be used as a user defined variable in boiwsa().
 #' @references Findley, D.F., Monsell, B.C., Bell, W.R., Otto, M.C. and B.C Chen (1998). New capabilities and methods of the X-12-ARIMA seasonal-adjustment program. Journal of Business & Economic Statistics, 16(2), pp.127-152.
 #' @export
 #' @examples

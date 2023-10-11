@@ -16,13 +16,13 @@
 #' @param ic Information criterion used in the automatic search for the number of trigonometric regressors. There are thee options: aic, aicc and bic. By default uses aicc
 #' @param method Decomposition type: additive or multiplicative
 #'
-#' @return {sa}{ Seasonally adjusted series}
-#' @return {my.k_l}{ Number of trigonometric variables used to model the seasonal pattern}
-#' @return {sf}{ Estimated seasonal effects}
-#' @return {hol.factors}{ Estimated holiday effects}
-#' @return {out.factors}{ Estimated outlier effects}
-#' @return {beta}{ Regression coefficients for the last year}
-#' @return {m}{ lm object. Unweighted OLS regression on the full sample}
+#' @return sa Seasonally adjusted series
+#' @return my.k_l Number of trigonometric variables used to model the seasonal pattern
+#' @return sf Estimated seasonal effects
+#' @return hol.factors Estimated holiday effects
+#' @return out.factors Estimated outlier effects
+#' @return beta Regression coefficients for the last year
+#' @return m lm object. Unweighted OLS regression on the full sample
 #' @author Tim Ginker
 #' @export
 #' @examples
