@@ -4,6 +4,10 @@
 # boiwsa
 
 <!-- badges: start -->
+
+[![](https://www.r-pkg.org/badges/version/boiwsa?color=green)](https://cran.r-project.org/package=boiwsa)
+[![](https://img.shields.io/badge/doi-DOI:10.13140/RG.2.2.12221.44000-yellow.svg)](https://doi.org/DOI:10.13140/RG.2.2.12221.44000)
+[![](https://img.shields.io/github/last-commit/timginker/boiwsa.svg)](https://github.com/timginker/boiwsa/commits/master)
 <!-- badges: end -->
 
 `boiwsa` is an R package for performing weekly seasonal adjustment on
