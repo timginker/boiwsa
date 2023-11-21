@@ -328,6 +328,8 @@ boiwsa=function(x,
 
       run=TRUE
 
+      f.sel.ao.dates=dates[f.sel.pos]
+
     }else{
 
       f.sel.ao.dates=NULL
@@ -339,10 +341,10 @@ boiwsa=function(x,
     while (run) {
 
 
-      f.sel.ao.dates=dates[f.sel.pos]
 
 
-      AObd=my_ao(dates=dates,out.list=c(my.AO.list,f.sel.ao.dates))
+
+      AObd=my_ao(dates=dates,out.list=as.Date(c(my.AO.list,f.sel.ao.dates)))
 
 
       Xst=cbind(X,H,AObd)
@@ -426,7 +428,7 @@ boiwsa=function(x,
 
   if (length(auto.ao$ao)>0) {
 
-    ao.list=c(ao.list,auto.ao$ao)
+    ao.list=as.Date(c(ao.list,auto.ao$ao))
   }
 
 
