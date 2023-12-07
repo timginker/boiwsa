@@ -344,7 +344,7 @@ boiwsa=function(x,
 
 
 
-      AObd=my_ao(dates=dates,out.list=as.Date(c(my.AO.list,f.sel.ao.dates)))
+      AObd=my_ao(dates=dates,out.list=lubridate::as_date(c(my.AO.list,f.sel.ao.dates)))
 
 
       Xst=cbind(X,H,AObd)
@@ -428,7 +428,7 @@ boiwsa=function(x,
 
   if (length(auto.ao$ao)>0) {
 
-    ao.list=as.Date(c(ao.list,auto.ao$ao))
+    ao.list=lubridate::as_date(c(ao.list,auto.ao$ao))
   }
 
 
