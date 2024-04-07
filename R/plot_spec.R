@@ -4,6 +4,7 @@
 #'
 #' @importFrom graphics abline legend lines
 #' @importFrom stats spec.ar
+#' @import ggplot2
 #'
 #' @param x boiwsa results
 #'
@@ -23,21 +24,22 @@ plot_spec=function(x){
   spec0=spec.ar((x$x-x$trend),order = 60,plot = F,n.freq=500)
   spec1=spec.ar((x$sa-x$trend),order = 60,plot = F)
 
-  #par(mfrow = c(1, 1))
-  plot(spec1$freq,spec0$spec,type="l",ylab="",xlab="frequency",lwd=2,col="darkgrey",main="Original and SA data AR spectrum")
-  lines(spec1$freq,spec1$spec,col="royalblue",lwd=1.5)
-  abline(v=(1:2)/4.34, col="red",lwd=1.5,lty=2)
-  abline(v=(1:3)/52.1775, col="black",lwd=1.5,lty=3)
-  legend(
-    "bottomleft",
-    legend = c("monthly peaks", "yearly peaks","original","SA"),
-    lwd = c(2,2,2,2),
-    lty=c(2,3,1,1),
-    col = c("red", "black","darkgrey","royalblue"),
-    bty = "n",inset = c( 0.5, 0.6)
-  )
-
-
+  ggplot2::ggplot()+
+    ggplot2::geom_line(aes(x=spec0$freq,y=spec0$spec,color="orig"))+
+    ggplot2::geom_line(aes(x=spec0$freq,y=spec1$spec,color="sa"))+
+    ggplot2::geom_vline(xintercept = 1:2/4.34,linetype="dashed")+
+    ggplot2::geom_text(aes(x=1:2/4.34, label="\n Intra-monthly cycle peacks", y=0.5*max(spec0$spec)), colour="black", angle=90)+
+    ggplot2::geom_vline(xintercept = (1:3)/52.1775,linetype="dashed")+
+    ggplot2::geom_text(aes(x=3/52.1775, label="\n First three intra-yearly cycle peacks", y=0.5*max(spec0$spec)), colour="black", angle=90)+
+    ggplot2::scale_color_manual(name = "",
+                                values = c( "orig"='#31a354', "sa"="#3182bd"),
+                                labels = c("Original", "Seasonally adjusted"))+
+    ggplot2::theme_bw()+
+    ggplot2::guides(y="none")+
+    ggplot2::theme(legend.position="bottom")+
+    ggplot2::theme(legend.text = element_text(size = 11))+
+    ggplot2::ylab(" ")+
+    ggplot2::xlab("Frequency")
 
 
 }
