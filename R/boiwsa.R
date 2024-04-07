@@ -708,6 +708,8 @@ boiwsa=function(x,
 
     sf=exp(sf)
 
+    x=exp(x)
+
 
   }
 

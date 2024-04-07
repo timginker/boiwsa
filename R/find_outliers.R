@@ -31,6 +31,39 @@
 
 find_outliers=function(x,dates,out.tolerance=3.8,my.AO.list=NULL,H=NULL,my.k_l=NULL,method="additive"){
 
+
+  #----------------------------------------------#
+
+  # create AO variables matrix
+
+  my_ao=function(dates,out.list) {
+
+    # checking that the dates in out.list are in the data, and removing them if not
+
+    out.list=out.list[out.list%in%dates]
+
+    if (length(out.list)>0) {
+
+      AO=matrix(0,nrow = length(dates), ncol=length(out.list))
+
+      for (i in 1:ncol(AO)) {
+
+        AO[dates==out.list[i],i]=1
+
+      }
+
+      colnames(AO)=paste0("AO ",lubridate::as_date(out.list))
+
+    }else{AO=NULL}
+
+
+    return(AO)
+
+  }
+
+
+
+  #----------------------------------------------#
   # function to find optimal number of trigonometric variables
 
   find_opt=function(x,dates,H=NULL,AO=NULL,method="additive",l.max=24,k.max=42,by=6){
@@ -164,6 +197,7 @@ find_outliers=function(x,dates,out.tolerance=3.8,my.AO.list=NULL,H=NULL,my.k_l=N
 
 
 
+
   if (method=="multiplicative") {
     x=log(x)
   }
@@ -172,128 +206,162 @@ find_outliers=function(x,dates,out.tolerance=3.8,my.AO.list=NULL,H=NULL,my.k_l=N
 
   y=x-trend.init
 
-  if (is.null(my.k_l)) {
 
+  # if my.k_l is not specified
+  if (is.null(my.k_l)) {
+    # if there are no prespceified AOs set AO=NULL
     if (is.null(my.AO.list)) {
       AO=NULL
+    }else{
+    #if there are prespecifed AO dates, create AO variables
+      AO=my_ao(dates=dates,out.list =my.AO.list )
+
     }
 
-    opt=find_opt(x = x, dates = dates,H = H, AO = AO, method=method)
-
+    # search for optimal number of Fourier variables
+    opt=find_opt(x = y, dates = dates,H = H, AO = AO)
+    # set my.k_l based on AICc
     my.k_l=opt$opt.aicc
 
   }
 
-  X=fourier_vars(k=my.k_l[1],l=my.k_l[2],dates = dates)
+  # RUN only if there are a positive number of Fourier variables
+  if(sum(my.k_l)>0){
+
+    X=fourier_vars(k=my.k_l[1],l=my.k_l[2],dates = dates)
 
 
-  Xs=cbind(X,H,AO)
+    Xs=cbind(X,H,AO)
 
-  err=y-Xs%*%solve(t(Xs)%*%Xs)%*%t(Xs)%*%y
-
-  sig_R=1.49*stats::median(abs(err))
-
-
-
-  f.sel.pos=NULL
-
-  out.search.points=(1:length(dates))[!dates%in%my.AO.list]
-
-  run=T
-
-  while (run) {
-
-    Ts=NULL
-
-    for (t in out.search.points) {
-
-      AOt=rep(0,length(dates))
-
-      AOt[t]=1
-
-      Xst=cbind(Xs,AOt)
-
-      Tt=(solve(t(Xst)%*%Xst)%*%t(Xst)%*%y)[ncol(Xst)]/(diag(solve((t(Xst)%*%Xst))*sig_R^2)[ncol(Xst)]^0.5)
-
-      Ts=c(Ts,abs(Tt))
-
-    }
-
-
-    if (max(Ts)>=out.tolerance) {
-
-      AOt=rep(0,length(dates))
-
-      AOt[out.search.points[which.max(Ts)]]=1
-
-      f.sel.pos=c(f.sel.pos,out.search.points[which.max(Ts)])
-
-      out.search.points=out.search.points[-which.max(Ts)]
-
-
-
-      Xs=cbind(Xs,AOt)
-
-    }
-
-
-
-
-
-    if (max(Ts)<out.tolerance) {
-      run=F
-    }
-
-
-  }
-
-
-  # Backward deletion
-
-
-  if(length(f.sel.pos)>0){run=T}
-
-
-
-  while (run) {
-
-
-    f.sel.ao.dates=dates[f.sel.pos]
-
-
-    AObd=my_ao(dates=dates,out.list=c(my.AO.list,f.sel.ao.dates))
-
-
-    Xst=cbind(X,H,AObd)
-
-    err=y-Xst%*%solve(t(Xst)%*%Xst)%*%t(Xst)%*%y
+    err=y-Xs%*%solve(t(Xs)%*%Xs)%*%t(Xs)%*%y
 
     sig_R=1.49*stats::median(abs(err))
 
-    Tt=abs((solve(t(Xst)%*%Xst)%*%t(Xst)%*%y)/(diag(solve((t(Xst)%*%Xst))*sig_R^2)^0.5))[(ncol(Xst)-length(f.sel.ao.dates)+1):ncol(Xst)]
 
 
-    if(min(Tt)<out.tolerance){
+    f.sel.pos=NULL
 
-      f.sel.ao.dates=f.sel.ao.dates[-which.min(Tt)]
+    out.search.points=(1:length(dates))[!dates%in%my.AO.list]
+
+    run=TRUE
+
+    while (run) {
+
+      Ts=NULL
+
+      for (t in out.search.points) {
+
+        AOt=rep(0,length(dates))
+
+        AOt[t]=1
+
+        Xst=cbind(Xs,AOt)
+
+        Tt=(solve(t(Xst)%*%Xst)%*%t(Xst)%*%y)[ncol(Xst)]/(diag(solve((t(Xst)%*%Xst))*sig_R^2)[ncol(Xst)]^0.5)
+
+        Ts=c(Ts,abs(Tt))
+
+      }
+
+
+      if (max(Ts)>=out.tolerance) {
+
+        AOt=rep(0,length(dates))
+
+        AOt[out.search.points[which.max(Ts)]]=1
+
+        f.sel.pos=c(f.sel.pos,out.search.points[which.max(Ts)])
+
+        out.search.points=out.search.points[-which.max(Ts)]
+
+
+
+        Xs=cbind(Xs,AOt)
+
+      }
+
+
+
+
+
+      if (max(Ts)<out.tolerance) {
+        run=FALSE
+      }
+
+
+    }
+
+
+    # Backward deletion
+
+
+    if(length(f.sel.pos)>0){
+
+      run=TRUE
+
+      f.sel.ao.dates=dates[f.sel.pos]
 
     }else{
 
-      run=F
+      f.sel.ao.dates=NULL
+
+    }
+
+
+
+    while (run) {
+
+
+
+
+
+      AObd=my_ao(dates=dates,out.list=lubridate::as_date(c(my.AO.list,f.sel.ao.dates)))
+
+
+      Xst=cbind(X,H,AObd)
+
+      err=y-Xst%*%solve(t(Xst)%*%Xst)%*%t(Xst)%*%y
+
+      sig_R=1.49*stats::median(abs(err))
+
+      Tt=abs((solve(t(Xst)%*%Xst)%*%t(Xst)%*%y)/(diag(solve((t(Xst)%*%Xst))*sig_R^2)^0.5))[(ncol(Xst)-length(f.sel.ao.dates)+1):ncol(Xst)]
+
+
+      if(min(Tt)<out.tolerance){
+
+        f.sel.ao.dates=f.sel.ao.dates[-which.min(Tt)]
+
+      }else{
+
+        run=FALSE
+      }
+
+      if(length(f.sel.ao.dates)==0){
+
+        run=FALSE
+      }
+
+
     }
 
     if(length(f.sel.ao.dates)==0){
 
-      run=F
+      f.sel.ao.dates=NULL
+    }else{
+
+      f.sel.ao.dates=f.sel.ao.dates[order(f.sel.ao.dates)]
     }
 
 
+
+    return(list(ao=f.sel.ao.dates,my.k_l=my.k_l))
+
+
+  }else{
+
+    return(list(ao=NULL,my.k_l=my.k_l))
   }
 
-
-  f.sel.ao.dates=f.sel.ao.dates[order(f.sel.ao.dates)]
-
-  return(list(ao=f.sel.ao.dates,my.k_l=my.k_l))
 
 
 
