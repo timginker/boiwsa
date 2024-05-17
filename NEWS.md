@@ -13,3 +13,5 @@
 * Fixed various inconsistencies in code
 
 * Improved plot_spec
+
+* Replaced paper link
