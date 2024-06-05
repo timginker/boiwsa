@@ -54,7 +54,7 @@ beta Regression coefficients for the last year
 m lm object. Unweighted OLS regression on the full sample
 }
 \description{
-Seasonal adjustment of weekly data
+Performs seasonal adjustment of weekly data. For more details on the usage of this function see the paper or the examples on Github.
 }
 \examples{
  # Not run

@@ -1,5 +1,7 @@
 #' Seasonal adjustment of weekly data
 #'
+#' Performs seasonal adjustment of weekly data. For more details on the usage of this function see the paper or the examples on Github.
+#'
 #' @import lubridate
 #' @importFrom Hmisc yearDays
 #' @importFrom stats AIC BIC lm median supsmu
