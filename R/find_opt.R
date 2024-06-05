@@ -3,7 +3,6 @@
 #' Searches through the model space to identify the best number of trigonometric variables, with the lowest AIC, AICc or BIC value.
 #'
 #' @importFrom stats supsmu lm AIC BIC
-#' @importFrom MuMIn AICc
 #' @import lubridate
 #'
 #' @param x Numeric vector. Time series to seasonally adjust
@@ -138,7 +137,7 @@ find_opt=function(x,dates,H=NULL,AO=NULL,method="additive",l.max=24,k.max=42,by=
 
 
       aic0[i,j]=stats::AIC(m)
-      aicc0[i,j]=MuMIn::AICc(m)
+      aicc0[i,j]=stats::AIC(m)+2*length(m$coefficients)*(length(m$coefficients)+1)/(length(m$residuals)-length(m$coefficients)+1)
       bic0[i,j]=stats::BIC(m)
 
     }

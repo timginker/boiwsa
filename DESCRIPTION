@@ -17,7 +17,6 @@ Imports:
     ggplot2,
     Hmisc,
     lubridate,
-    MuMIn,
     stats,
     tidyr,
     rlang

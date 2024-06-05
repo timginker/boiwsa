@@ -3,7 +3,6 @@
 #' @import lubridate
 #' @importFrom Hmisc yearDays
 #' @importFrom stats AIC BIC lm median supsmu
-#' @import MuMIn
 #'
 #' @param x Input time series as a numeric vector
 #' @param dates a vector of class "Date", containing the data dates
@@ -124,7 +123,7 @@ boiwsa=function(x,
 
 
         aic0[i,j]=stats::AIC(m)
-        aicc0[i,j]=MuMIn::AICc(m)
+        aicc0[i,j]=stats::AIC(m)+2*length(m$coefficients)*(length(m$coefficients)+1)/(length(m$residuals)-length(m$coefficients)+1)
         bic0[i,j]=stats::BIC(m)
 
       }
