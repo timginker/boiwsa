@@ -15,3 +15,7 @@
 * Improved plot_spec
 
 * Replaced paper link
+
+# boiwsa 1.1.1
+
+* Following the CRAN Team request, removed dependency on MuMIn that is about to be archived.

@@ -2,8 +2,7 @@
 
 0 errors | 0 warnings | 0 notes
 
-* This is an updated version with a few bug and inconsistency issues fixed.
+* Following the CRAN Team request, removed dependency on MuMIn that is about to be archived.
 
 * Examples running longer than 5s were wrapped in \donttest{}
 
-* Replaced a paper link
