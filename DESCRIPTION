@@ -1,7 +1,7 @@
 Package: boiwsa
 Type: Package
 Title: Seasonal Adjustment of Weekly Data
-Version: 1.1.01
+Version: 1.1.1
 Authors@R: 
     person("Tim", "Ginker", email ="tim.ginker@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0002-7138-5417"))
