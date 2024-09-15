@@ -43,29 +43,11 @@ boiwsa=function(x,
                 H=NULL,
                 ic="aicc",
                 method="additive"){
-  ############
-  # Arguments:
-  ############
-  # x - time series to seasonally adjust. object of class vector
-  # dates - vector of dates in a date format
-  # r - weight decay parameter
-  # ao.list - vector of outlier dates in a date format
-  # my.k_l - vector with two numbers for fourier variables, for yearly and monthly seasonality, respectively
-  # H - matrix of holiday and trading day variables
-  ########
-  # Value:
-  ########
-  # sa - seasonally adjusted series
-  # my.k_l
-  # sf - seasonal factors
-  # hol.factors - holiday and trading day factors
-  # out.factors - outlier factors
-  # beta - vector of regression coefficients for the last year
-  # m - lm object
 
 
 
-  #----------------------------------------------#
+
+# my_ao - function that creates additive outlier variables --------------------------------------
   my_ao=function(dates,out.list) {
 
     # checking that the dates in out.list are in the data, and removing them if not
@@ -94,7 +76,7 @@ boiwsa=function(x,
   }
 
 
-  #----------------------------------------------#
+# find_opt - function that searches for the optimal number of the Fourier variables --------------------------------------
 
 
   find_opt=function(y,dates,H=NULL,AO=NULL){
@@ -143,12 +125,9 @@ boiwsa=function(x,
   }
 
 
-  #----------------------------------------------#
+# fourier_vars - function that creates fourier variables --------------------------------------
 
   fourier_vars=function(k=1,l=1,dates){
-
-    # packages: Hmisc, lubridate
-
 
     # k- number of yearly cycle fourier terms
     # l - number of monthly cycle fourier terms
@@ -225,7 +204,7 @@ boiwsa=function(x,
   }
 
 
-  #----------------------------------------------#
+# find_outliers - function that searches for additive outliers --------------------------------------
 
   find_outliers=function(y,
                          dates,
@@ -396,17 +375,12 @@ boiwsa=function(x,
 
   }
 
-  #----------------------------------------------#
 
+# First run --------------------------------------
 
   if (method=="multiplicative") {
     x=log(x)
   }
-
-
-  #############################
-  # First RUN
-  #############################
 
 
   # computing initial trend estimate with Friedman's SuperSmoother
@@ -562,9 +536,9 @@ boiwsa=function(x,
 
   }
 
-  ####################
-  # Second RUN
-  ####################
+
+# Second run --------------------------------------
+
 
 
   trend.init=supsmu(1:length(x),seas.out.adj)$y
@@ -723,7 +697,7 @@ boiwsa=function(x,
   #colnames(my.k_l)=c("yearly variables","monthly variables")
 
 
-
+# Creating output --------------------------------------
 
   return(list(sa=sa,
               my.k_l=my.k_l,
