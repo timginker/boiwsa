@@ -130,7 +130,9 @@ library(boiwsa)
 ```
 
 Next, load your time series data into a data frame object. Here is an
-example that is based on the `gasoline` data from the `fpp2` package:
+example that is based on the `gasoline` data from the US Energy
+Information Administration that we copied from the from the `fpp2`
+package:
 
 ``` r
 data("gasoline.data")
@@ -168,15 +170,7 @@ addition, the estimated seasonal factors are stored as `sf`.
 You can then plot the adjusted data to visualize the seasonal pattern:
 
 ``` r
-plot(gasoline.data$date,gasoline.data$y,type="l",xlab="Year",ylab=" ", main="Weekly US gasoline production")
-lines(gasoline.data$date,res$sa,col="red")
-legend(
-  "topleft",
-  legend = c("Original", "SA"),
-  lwd = c(2,2),
-  col = c("black", "red"),
-  bty = "n"
-)
+plot(res)
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />

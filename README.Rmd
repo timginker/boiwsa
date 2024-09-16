@@ -110,11 +110,11 @@ R CMD INSTALL .
 
 Using `boiwsa` is simple. First, load the `boiwsa` package:
 
-```{r}
+```{r message=FALSE}
 library(boiwsa)
 ```
 
-Next, load your time series data into a data frame object. Here is an example that is based on the `gasoline` data from the `fpp2` package:
+Next, load your time series data into a data frame object. Here is an example that is based on the `gasoline` data from the US Energy Information Administration that we copied from the from the `fpp2` package:
 
 
 ```{r}
@@ -139,25 +139,14 @@ The procedure automatically searches for additive outliers (AO) using the method
 
 The `boiwsa` function returns a list object containing the results. The seasonally adjusted series is stored in a vector called `sa`. In addition, the estimated seasonal factors are stored as `sf`. 
 
-
 You can then plot the adjusted data to visualize the seasonal pattern:
 
 ```{r}
-plot(gasoline.data$date,gasoline.data$y,type="l",xlab="Year",ylab=" ", main="Weekly US gasoline production")
-lines(gasoline.data$date,res$sa,col="red")
-legend(
-  "topleft",
-  legend = c("Original", "SA"),
-  lwd = c(2,2),
-  col = c("black", "red"),
-  bty = "n"
-)
+plot(res)
 ```
 
 
 To evaluate the quality of the adjustment, you can use the `plot_spec` function provided by the package, which generates a plot of the autoregressive spectrum of the raw and seasonally adjusted data:
-
-
 
 ```{r}
 plot_spec(res)
