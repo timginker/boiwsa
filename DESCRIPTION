@@ -7,7 +7,7 @@ Authors@R:
            comment = c(ORCID = "0000-0002-7138-5417"))
 Author: Tim Ginker [aut, cre, cph] (<https://orcid.org/0000-0002-7138-5417>)
 Maintainer: Tim Ginker <tim.ginker@gmail.com>           
-Description: Perform seasonal adjustment of weekly data. The package offers a user-friendly interface for computing seasonally adjusted estimates of weekly data and also includes diagnostic tools to assess the quality of the adjustments. Furthermore, it incorporates tools uniquely tailored to the specific characteristics of Israeli data. The method is described in more detail in Ginker (2023) <doi:10.13140/RG.2.2.12221.44000>.
+Description: Perform seasonal adjustment of weekly data. The package provides a user-friendly interface for computing seasonally adjusted estimates of weekly data and includes functions for the creation of country-specific prior adjustment variables, as well as diagnostic tools to assess the quality of the adjustments. The method is described in more detail in Ginker (2023) <doi:10.13140/RG.2.2.12221.44000>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -19,7 +19,8 @@ Imports:
     lubridate,
     stats,
     tidyr,
-    rlang
+    rlang,
+    gridExtra
 LazyData: true
 Depends: 
     R (>= 2.10)

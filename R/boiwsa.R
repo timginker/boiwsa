@@ -699,32 +699,42 @@ boiwsa=function(x,
 
 # Creating output --------------------------------------
 
-  return(list(sa=sa,
-              my.k_l=my.k_l,
-              seasonal.factors=sf,
-              hol.factors=hol.factors,
-              out.factors=out.factors,
-              trend=trend.fin,
-              beta=beta,
-              m=m,
-              x=x,
-              ao.list=lubridate::as_date(ao.list)))
+  final_output=list(sa=sa,
+                    my.k_l=my.k_l,
+                    seasonal.factors=sf,
+                    hol.factors=hol.factors,
+                    out.factors=out.factors,
+                    trend=trend.fin,
+                    beta=beta,
+                    m=m,
+                    x=x,
+                    dates=dates,
+                    ao.list=lubridate::as_date(ao.list))
+
+  class(final_output)="boiwsa"
+
+  return(final_output)
 
 
   }else{
 
     message("Series should not be a candidate for seasonal adjustment because automatic selection found k=l=0")
 
-    return(list(sa=NULL,
-                my.k_l=c(0,0),
-                seasonal.factors=NULL,
-                hol.factors=NULL,
-                out.factors=NULL,
-                trend=NULL,
-                beta=NULL,
-                m=NULL,
-                x=x,
-                ao.list=NULL))
+    final_output=list(sa=NULL,
+                      my.k_l=c(0,0),
+                      seasonal.factors=NULL,
+                      hol.factors=NULL,
+                      out.factors=NULL,
+                      trend=NULL,
+                      beta=NULL,
+                      m=NULL,
+                      x=x,
+                      dates=dates,
+                      ao.list=NULL)
+
+    class(final_output)="boiwsa"
+
+    return(final_output)
 
 
 }
