@@ -117,19 +117,21 @@ library(boiwsa)
 Next, load your time series data into a data frame object. Here is an example that is based on the `gasoline` data from the US Energy Information Administration that we copied from the from the `fpp2` package:
 
 
-```{r}
+```{r out.width=0.5, out.height=0.5}
 data("gasoline.data")
-
-plot(gasoline.data$date,gasoline.data$y,type="l",xlab="Year",ylab=" ", main="Weekly US gasoline production")
+plot(gasoline.data$date,
+     gasoline.data$y,
+     type="l"
+     ,xlab="Year",
+     ylab=" ",
+     main="Weekly US gasoline production")
 ```
 
 
 Once you have your data loaded, you can use the `boiwsa` function to perform weekly seasonal adjustment:
 
 ```{r}
-
 res=boiwsa(x=gasoline.data$y,dates=gasoline.data$date)
-
 ```
 
 The `x` argument takes the series to be seasonally adjusted, while the dates argument takes the associated dates in date format. Unless specified otherwise (i.e., `my.k_l = NULL`), the procedure automatically identifies the best number of trigonometric variables to capture the yearly ($K$) and monthly ($L$) cycles based on the AICc. The information criterion is specified by the `ic` option. The weighting decay rate is specified by `r` (by default `r=0.8`).
@@ -141,14 +143,14 @@ The `boiwsa` function returns a list object containing the results. The seasonal
 
 You can then plot the adjusted data to visualize the seasonal pattern:
 
-```{r}
+```{r out.width=0.5}
 plot(res)
 ```
 
 
 To evaluate the quality of the adjustment, you can use the `plot_spec` function provided by the package, which generates a plot of the autoregressive spectrum of the raw and seasonally adjusted data:
 
-```{r}
+```{r out.width=0.3}
 plot_spec(res)
 ```
 
