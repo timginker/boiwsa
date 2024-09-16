@@ -19,3 +19,7 @@
 # boiwsa 1.1.1
 
 * Following the CRAN Team request, removed dependency on MuMIn that is about to be archived.
+
+# boiwsa 1.1.2
+
+Added an S3 class and created appropriate print, summary and plot functions.
