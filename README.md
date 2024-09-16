@@ -144,7 +144,7 @@ plot(gasoline.data$date,
      main="Weekly US gasoline production")
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="0.5" height="0.5" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="70%" />
 
 Once you have your data loaded, you can use the `boiwsa` function to
 perform weekly seasonal adjustment:
@@ -176,7 +176,7 @@ You can then plot the adjusted data to visualize the seasonal pattern:
 plot(res)
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="0.5" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="70%" />
 
 To evaluate the quality of the adjustment, you can use the `plot_spec`
 function provided by the package, which generates a plot of the
@@ -186,7 +186,7 @@ autoregressive spectrum of the raw and seasonally adjusted data:
 plot_spec(res)
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="0.3" />
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="70%" />
 
 # References
 
