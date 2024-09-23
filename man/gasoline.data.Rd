@@ -15,7 +15,7 @@ A data frame with 1355 rows and 2 columns:
 }
 }
 \source{
-fpp2 package
+Originally from the US Energy Information Administration. Copied from the fpp2 package.
 }
 \usage{
 gasoline.data

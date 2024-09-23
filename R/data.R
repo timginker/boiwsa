@@ -8,7 +8,7 @@
 #'   \item{date}{date in a date format}
 #'   \item{y}{gasoline consumption}
 #' }
-#' @source fpp2 package
+#' @source Originally from the US Energy Information Administration. Copied from the fpp2 package.
 "gasoline.data"
 
 #' @title Israeli working dates
