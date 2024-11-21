@@ -33,6 +33,16 @@ find_outliers=function(x,dates,out.tolerance=3.8,my.AO.list=NULL,H=NULL,my.k_l=N
 
   #----------------------------------------------#
 
+  rankUpdateInverse <- function(X_inv, X_t, v) {
+    u1 <- X_t %*% v
+    u2 <- X_inv %*% u1
+    d <- as.numeric(1 / (t(v) %*% v - t(u1) %*% u2))
+    u3 <- d * u2
+    F11_inv <- X_inv + d * u2 %*% t(u2)
+    XtX_inv <- rbind(cbind(F11_inv, -u3), c(-u3, d))
+    return(XtX_inv)
+  }
+
   # create AO variables matrix
 
   my_ao=function(dates,out.list) {
@@ -363,19 +373,4 @@ find_outliers=function(x,dates,out.tolerance=3.8,my.AO.list=NULL,H=NULL,my.k_l=N
 
 
 
-}
-
-#' Update the inverse of a cross product of a matrix X when adding a new column v
-#' @param X_inv The inverse (X^T X)^-1 before adding the new column
-#' @param X_t The transpose of X, i.e. X^T
-#' @param v The column to add
-#' @return The inverse of ([X v]^T [X v])^-1
-rankUpdateInverse <- function(X_inv, X_t, v) {
-  u1 <- X_t %*% v
-  u2 <- X_inv %*% u1
-  d <- as.numeric(1 / (t(v) %*% v - t(u1) %*% u2))
-  u3 <- d * u2
-  F11_inv <- X_inv + d * u2 %*% t(u2)
-  XtX_inv <- rbind(cbind(F11_inv, -u3), c(-u3, d))
-  return(XtX_inv)
 }

@@ -2,10 +2,10 @@ Package: boiwsa
 Type: Package
 Title: Seasonal Adjustment of Weekly Data
 Version: 1.1.2
-Authors@R: 
+Authors@R: c(
     person("Tim", "Ginker", email ="tim.ginker@gmail.com", role = c("aut", "cre", "cph"),
-           comment = c(ORCID = "0000-0002-7138-5417"))
-    person("Jon", "Lachman", role = "ctb", email = "jon@indicio.com")
+           comment = c(ORCID = "0000-0002-7138-5417")),
+    person("Jon", "Lachman", role = "ctb", email = "jon@indicio.com"))
 Maintainer: Tim Ginker <tim.ginker@gmail.com>           
 Description: Perform seasonal adjustment of weekly data. The package provides a user-friendly interface for computing seasonally adjusted estimates of weekly data and includes functions for the creation of country-specific prior adjustment variables, as well as diagnostic tools to assess the quality of the adjustments. The method is described in more detail in Ginker (2023) <doi:10.13140/RG.2.2.12221.44000>.
 License: MIT + file LICENSE

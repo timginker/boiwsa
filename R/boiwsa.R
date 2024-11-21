@@ -44,8 +44,23 @@ boiwsa=function(x,
                 ic="aicc",
                 method="additive"){
 
+  # rankUpdateInverse - Update the inverse of a cross product of a matrix X when adding a new column v --------------------------------------
+  # X_inv The inverse (X^T X)^-1 before adding the new column
+  # X_t The transpose of X, i.e. X^T
+  # v The column to add
+  # returns The inverse of ([X v]^T [X v])^-1
 
 
+
+  rankUpdateInverse <- function(X_inv, X_t, v) {
+    u1 <- X_t %*% v
+    u2 <- X_inv %*% u1
+    d <- as.numeric(1 / (t(v) %*% v - t(u1) %*% u2))
+    u3 <- d * u2
+    F11_inv <- X_inv + d * u2 %*% t(u2)
+    XtX_inv <- rbind(cbind(F11_inv, -u3), c(-u3, d))
+    return(XtX_inv)
+  }
 
 # my_ao - function that creates additive outlier variables --------------------------------------
   my_ao=function(dates,out.list) {
