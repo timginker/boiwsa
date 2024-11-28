@@ -144,9 +144,15 @@ predict.boiwsa<-function(x,
 
   # fitting auto.arima to seasonally- and outlier adjusted variables
 
-  fit=forecast::auto.arima(ifelse(length(x$ao.list)>0,
-                                  x$sa-x$out.factors,
-                                  x$sa),
+  if(length(x$ao.list)>0){
+
+    y_est=x$sa-x$out.factors
+  }else{
+
+    y_est=x$sa
+  }
+
+  fit=forecast::auto.arima(y_est,
                            seasonal = F)
 
   # forecasting sa sereies n.ahead periods forward
