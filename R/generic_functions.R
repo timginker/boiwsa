@@ -117,3 +117,120 @@ plot.boiwsa=function(x,...){
   }
 
 }
+
+
+#' Forecast
+#'
+#' S3 method for boiwsa. Returns forecasts and other information using a combination of nonseasonal
+#' auto.arima and estimates from boiwsa.
+#'
+#' @import forecast
+#' @importFrom lubridate days
+#'
+#' @param x An object of class \code{boiwsa}.
+#' @param n.ahead Number of periods for forecasting
+#' @param level Confidence level for prediction intervals
+#' @param new_H Matrix with holiday- and trading day factors
+#' @param ... Other arguments
+#'
+#' @return Matrix with the forecast values
+#' @export
+#'
+predict.boiwsa<-function(x,
+                          n.ahead,
+                          level=c(80, 95),
+                          new_H=NULL,...){
+
+  # fitting auto.arima to seasonally- and outlier adjusted variables
+
+  fit=forecast::auto.arima(ifelse(length(x$ao.list)>0,
+                                  x$sa-x$out.factors,
+                                  x$sa),
+                           seasonal = F)
+
+  # forecasting sa sereies n.ahead periods forward
+
+  fct=forecast::forecast(fit,
+                         h=n.ahead,
+                         level=level)
+
+
+
+  # forecasting seasonal factors
+
+  if(is.null(new_H)){
+
+    new_dates=seq.Date(from=as.Date(x$dates[length(x$dates)])+lubridate::days(7),
+                       by="weeks",
+                       length.out = n.ahead)
+
+    # creating Fourier variables
+    seas_vars_fct=boiwsa::fourier_vars(k=x$my.k_l[1],
+                                          l=x$my.k_l[2],
+                                          dates = new_dates)
+
+    # forecasting seasonal factors
+    seas_factors_fct=as.matrix(seas_vars_fct)%*%as.matrix(x$beta[1:(sum(x$my.k_l)*2)])
+
+    point_fct=as.numeric(fct$mean)+seas_factors_fct
+
+    bound_L1=point_fct-as.numeric(fct$mean-fct$lower[,1])
+    bound_L2=point_fct-as.numeric(fct$mean-fct$lower[,2])
+    bound_U1=point_fct+abs(as.numeric(fct$mean-fct$upper[,1]))
+    bound_U2=point_fct+abs(as.numeric(fct$mean-fct$upper[,2]))
+
+    fct_fin=data.frame(dates=new_dates,
+                       mean=point_fct,
+                       low1=bound_L1,
+                       low2=bound_L2,
+                       up1=bound_U1,
+                       up2=bound_U2)
+
+   colnames(fct_fin)[3]=paste0("lower ",level[1],"%")
+   colnames(fct_fin)[4]=paste0("lower ",level[2],"%")
+   colnames(fct_fin)[5]=paste0("upper ",level[1],"%")
+   colnames(fct_fin)[6]=paste0("upper ",level[2],"%")
+
+
+
+  }else{
+
+    new_dates=seq.Date(from=as.Date(x$dates[length(x$dates)])+lubridate::days(7),
+                       by="weeks",
+                       length.out = n.ahead)
+
+    # creating Fourier variables
+    seas_vars_fct=boiwsa::fourier_vars(k=x$my.k_l[1],
+                                       l=x$my.k_l[2],
+                                       dates = new_dates)
+
+    # forecasting seasonal factors
+    seas_factors_fct=as.matrix(seas_vars_fct)%*%as.matrix(x$beta[1:(sum(x$my.k_l)*2)])
+
+    add_fctors=as.matrix(new_H)%*%as.matrix(x$beta[(sum(x$my.k_l)*2+1):(sum(x$my.k_l)*2+ncol(new_H))])
+
+    point_fct=as.numeric(fct$mean)+seas_factors_fct+add_fctors
+
+    bound_L1=point_fct-as.numeric(fct$mean-fct$lower[,1])
+    bound_L2=point_fct-as.numeric(fct$mean-fct$lower[,2])
+    bound_U1=point_fct+abs(as.numeric(fct$mean-fct$upper[,1]))
+    bound_U2=point_fct+abs(as.numeric(fct$mean-fct$upper[,2]))
+
+    fct_fin=data.frame(dates=new_dates,
+                       mean=point_fct,
+                       low1=bound_L1,
+                       low2=bound_L2,
+                       up1=bound_U1,
+                       up2=bound_U2)
+
+    colnames(fct_fin)[3]=paste0("lower ",level[1],"%")
+    colnames(fct_fin)[4]=paste0("lower ",level[2],"%")
+    colnames(fct_fin)[5]=paste0("upper ",level[1],"%")
+    colnames(fct_fin)[6]=paste0("upper ",level[2],"%")
+
+
+
+  }
+
+  return(list(forecast=fct_fin))
+}
