@@ -216,9 +216,11 @@ the code below:
 plot_spec(res)
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="70%" /> It is
-evident that the series originally had a single intra-yearly seasonal
-cycle, but this component was completely removed by the procedure.
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="70%" />
+
+It is evident that the series originally had a single intra-yearly
+seasonal cycle, but this component was completely removed by the
+procedure.
 
 We can also inspect the output to check if the number of trigonometric
 terms chosen by the automatic procedure matches our visual findings:

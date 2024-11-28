@@ -163,6 +163,7 @@ To assess the quality of the adjustment, we can plot the autoregressive spectrum
 ```{r out.width = "70%"}
 plot_spec(res)
 ```
+
 It is evident that the series originally had a single intra-yearly seasonal cycle, but this component was completely removed by the procedure.
 
 
