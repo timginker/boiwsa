@@ -134,6 +134,7 @@ plot.boiwsa=function(x,...){
 #' @param ... Other arguments
 #'
 #' @return Matrix with the forecast values
+#'
 #' @export
 #'
 predict.boiwsa<-function(x,
