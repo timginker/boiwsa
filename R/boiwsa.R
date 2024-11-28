@@ -699,6 +699,8 @@ boiwsa=function(x,
 
     x=exp(x)
 
+    out.factors=exp(out.factors)
+
 
   }
 
