@@ -239,5 +239,6 @@ predict.boiwsa<-function(x,
 
   }
 
-  return(list(forecast=fct_fin))
+  return(list(forecast=fct_fin,
+              fit=fit))
 }
