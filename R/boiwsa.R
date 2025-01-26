@@ -9,7 +9,7 @@
 #' @param x Input time series as a numeric vector
 #' @param dates a vector of class "Date", containing the data dates
 #' @param r Defines the rate of decay of the weights. Should be between zero and one. By default is set to 0.8.
-#' @param auto.ao.seacrh Boolean. Search for additive outliers
+#' @param auto.ao.search Boolean. Search for additive outliers
 #' @param out.threshold t-stat threshold in outlier search. By default is 3.8
 #' @param ao.list Vector with user specified additive outliers in a date format
 #' @param my.k_l Numeric vector defining the number of yearly and monthly trigonometric variables. If NULL, is found automatically using the information criteria
@@ -36,7 +36,7 @@
 boiwsa=function(x,
                 dates,
                 r=0.8,
-                auto.ao.seacrh=TRUE,
+                auto.ao.search=TRUE,
                 out.threshold=3.8,
                 ao.list=NULL,
                 my.k_l=NULL,
@@ -122,7 +122,7 @@ boiwsa=function(x,
 
 
         aic0[i,j]=stats::AIC(m)
-        aicc0[i,j]=stats::AIC(m)+2*length(m$coefficients)*(length(m$coefficients)+1)/(length(m$residuals)-length(m$coefficients)+1)
+        aicc0[i,j]=stats::AIC(m)+2*length(m$coefficients)*(length(m$coefficients)+1)/(length(m$residuals)-length(m$coefficients)-1)
         bic0[i,j]=stats::BIC(m)
 
       }
@@ -405,7 +405,7 @@ boiwsa=function(x,
 
   # looking for additive outliers
 
-  if(auto.ao.seacrh){
+  if(auto.ao.search){
 
     auto.ao=find_outliers(y=y,dates=dates,H = H,my.AO.list = ao.list)
 

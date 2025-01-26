@@ -137,7 +137,7 @@ find_opt=function(x,dates,H=NULL,AO=NULL,method="additive",l.max=24,k.max=42,by=
 
 
       aic0[i,j]=stats::AIC(m)
-      aicc0[i,j]=stats::AIC(m)+2*length(m$coefficients)*(length(m$coefficients)+1)/(length(m$residuals)-length(m$coefficients)+1)
+      aicc0[i,j]=stats::AIC(m)+2*length(m$coefficients)*(length(m$coefficients)+1)/(length(m$residuals)-length(m$coefficients)-1)
       bic0[i,j]=stats::BIC(m)
 
     }
