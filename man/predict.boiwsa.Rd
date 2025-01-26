@@ -4,7 +4,7 @@
 \alias{predict.boiwsa}
 \title{Forecast}
 \usage{
-\method{predict}{boiwsa}(x, n.ahead, level = c(80, 95), new_H = NULL, ...)
+\method{predict}{boiwsa}(x, n.ahead, level = c(80, 95), new_H = NULL, arima.options = NULL, ...)
 }
 \arguments{
 \item{x}{An object of class \code{boiwsa}.}
@@ -15,10 +15,12 @@
 
 \item{new_H}{Matrix with holiday- and trading day factors}
 
+\item{arima.options}{List of forecast::Arima arguments, intended for users who wish to apply a custom a custom model.}
+
 \item{...}{Other arguments}
 }
 \value{
-Matrix with the forecast values
+Matrix with the forecast values and ARIMA fit
 }
 \description{
 S3 method for boiwsa. Returns forecasts and other information using a combination of nonseasonal

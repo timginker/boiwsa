@@ -131,29 +131,38 @@ plot.boiwsa=function(x,...){
 #' @param n.ahead Number of periods for forecasting
 #' @param level Confidence level for prediction intervals
 #' @param new_H Matrix with holiday- and trading day factors
+#' @param arima.options List of forecast::Arima arguments, intended for users who wish to apply a custom a custom model.
 #' @param ... Other arguments
 #'
-#' @return Matrix with the forecast values
+#' @return Matrix with the forecast values and ARIMA fit
 #'
 #' @export
 #'
 predict.boiwsa<-function(x,
-                          n.ahead,
-                          level=c(80, 95),
-                          new_H=NULL,...){
+                         n.ahead,
+                         level=c(80, 95),
+                         new_H=NULL,
+                         arima.options=NULL,
+                         ...){
 
   # fitting auto.arima to seasonally- and outlier adjusted variables
 
   if(length(x$ao.list)>0){
 
-    y_est=x$sa-x$out.factors
+    y_est<-x$sa-x$out.factors
   }else{
 
-    y_est=x$sa
+    y_est<-x$sa
   }
 
-  fit=forecast::auto.arima(y_est,
-                           seasonal = F)
+
+  if(is.null(arima.options)){
+
+  fit<-forecast::auto.arima(y_est,
+                           seasonal = F)}else{
+
+  fit<-do.call(forecast::Arima,c(list(y=y_est),arima.options))
+                           }
 
   # forecasting sa sereies n.ahead periods forward
 
