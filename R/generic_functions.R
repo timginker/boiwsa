@@ -131,7 +131,7 @@ plot.boiwsa=function(x,...){
 #' @param n.ahead Number of periods for forecasting
 #' @param level Confidence level for prediction intervals
 #' @param new_H Matrix with holiday- and trading day factors
-#' @param arima.options List of forecast::Arima arguments, intended for users who wish to apply a custom a custom model.
+#' @param arima.options List of forecast::Arima arguments, intended for users who wish to apply a custom model.
 #' @param ... Other arguments
 #'
 #' @return Matrix with the forecast values and ARIMA fit

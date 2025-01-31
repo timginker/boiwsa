@@ -15,7 +15,7 @@
 
 \item{new_H}{Matrix with holiday- and trading day factors}
 
-\item{arima.options}{List of forecast::Arima arguments, intended for users who wish to apply a custom a custom model.}
+\item{arima.options}{List of forecast::Arima arguments, intended for users who wish to apply a custom model.}
 
 \item{...}{Other arguments}
 }
