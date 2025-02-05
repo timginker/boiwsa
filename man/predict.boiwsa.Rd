@@ -2,27 +2,25 @@
 % Please edit documentation in R/generic_functions.R
 \name{predict.boiwsa}
 \alias{predict.boiwsa}
-\title{Forecast}
+\title{Predict}
 \usage{
-\method{predict}{boiwsa}(x, n.ahead, level = c(80, 95), new_H = NULL, arima.options = NULL, ...)
+\method{predict}{boiwsa}(object, ...)
 }
 \arguments{
-\item{x}{An object of class \code{boiwsa}.}
+\item{object}{An object of class \code{boiwsa}.}
 
-\item{n.ahead}{Number of periods for forecasting}
-
-\item{level}{Confidence level for prediction intervals}
-
-\item{new_H}{Matrix with holiday- and trading day factors}
-
-\item{arima.options}{List of forecast::Arima arguments, intended for users who wish to apply a custom model.}
-
-\item{...}{Other arguments}
+\item{...}{Additional arguments:
+\itemize{
+\item \code{n.ahead}: Number of periods for forecasting (required).
+\item \code{level}: Confidence level for prediction intervals.
+\item \code{new_H}: Matrix with holiday- and trading day factors.
+\item \code{arima.options}: List of \code{forecast::Arima} arguments for custom modeling.
+}}
 }
 \value{
-Matrix with the forecast values and ARIMA fit
+A list containing the forecast values and ARIMA fit.
 }
 \description{
-S3 method for boiwsa. Returns forecasts and other information using a combination of nonseasonal
+S3 method for 'boiwsa' class. Returns forecasts and other information using a combination of nonseasonal
 auto.arima and estimates from boiwsa.
 }
