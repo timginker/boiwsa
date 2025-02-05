@@ -30,7 +30,7 @@ boiwsa(
 
 \item{ao.list}{Vector with user specified additive outliers in a date format}
 
-\item{my.k_l}{Numeric vector defining the number of yearly and monthly trigonometric variables. If NULL, is found automatically using the information criteria}
+\item{my.k_l}{Numeric vector defining the number of yearly and monthly trigonometric variables. If NULL, is found automatically using the information criteria. The search range is 0:36 and 0:12 with the step size of 6 for the yearly and monthly variables, respectively.}
 
 \item{H}{Matrix with holiday- and trading day factors}
 

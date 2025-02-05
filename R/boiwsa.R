@@ -12,7 +12,7 @@
 #' @param auto.ao.search Boolean. Search for additive outliers
 #' @param out.threshold t-stat threshold in outlier search. By default is 3.8
 #' @param ao.list Vector with user specified additive outliers in a date format
-#' @param my.k_l Numeric vector defining the number of yearly and monthly trigonometric variables. If NULL, is found automatically using the information criteria
+#' @param my.k_l Numeric vector defining the number of yearly and monthly trigonometric variables. If NULL, is found automatically using the information criteria. The search range is 0:36 and 0:12 with the step size of 6 for the yearly and monthly variables, respectively.
 #' @param H Matrix with holiday- and trading day factors
 #' @param ic Information criterion used in the automatic search for the number of trigonometric regressors. There are thee options: aic, aicc and bic. By default uses aicc
 #' @param method Decomposition type: additive or multiplicative
@@ -101,14 +101,25 @@ boiwsa=function(x,
     # AO - additive outlier variables (as matrix)
 
 
-    aic0=matrix(NA,nrow=length(seq(6,42,6)),ncol=length(seq(6,42,6)))
-    aicc0=matrix(NA,nrow=length(seq(6,42,6)),ncol=length(seq(6,42,6)))
-    bic0=matrix(NA,nrow=length(seq(6,42,6)),ncol=length(seq(6,42,6)))
+    aic0=matrix(NA,nrow=length(seq(6,42,6)),ncol=length(seq(6,18,6)))
+    aicc0=matrix(NA,nrow=length(seq(6,42,6)),ncol=length(seq(6,18,6)))
+    bic0=matrix(NA,nrow=length(seq(6,42,6)),ncol=length(seq(6,18,6)))
+
+    # naming rows and columns by the number of variables
+
+    rownames(aic0)=paste0("k = ",seq(0,36,6))
+    colnames(aic0)=paste0("l = ",seq(0,12,6))
+
+    rownames(aicc0)=paste0("k = ",seq(0,36,6))
+    colnames(aicc0)=paste0("l = ",seq(0,12,6))
+
+    rownames(bic0)=paste0("k = ",seq(0,36,6))
+    colnames(bic0)=paste0("l = ",seq(0,12,6))
 
 
     for (i in 1:length(seq(6,42,6))) {
 
-      for (j in 1:length(seq(6,42,6))) {
+      for (j in 1:length(seq(6,18,6))) {
 
         X=fourier_vars(k=(i-1)*6,l=(j-1)*6,dates)
 
