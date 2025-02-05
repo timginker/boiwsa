@@ -12,3 +12,4 @@
 
 * Examples running longer than 5s were wrapped in \donttest{}
 
+* Fixed predictS3 generic/method inconsistency 
