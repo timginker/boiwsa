@@ -128,8 +128,8 @@ plot.boiwsa=function(x,...){
 #' @param ... Additional arguments:
 #'   \itemize{
 #'     \item \code{n.ahead}: Number of periods for forecasting (required).
-#'     \item \code{level}: Confidence level for prediction intervals.
-#'     \item \code{new_H}: Matrix with holiday- and trading day factors.
+#'     \item \code{level}: Confidence level for prediction intervals. By default is set to c(80, 95).
+#'     \item \code{new_H}: Matrix with future holiday- and trading day factors.
 #'     \item \code{arima.options}: List of \code{forecast::Arima} arguments for custom modeling.
 #'   }
 #'
