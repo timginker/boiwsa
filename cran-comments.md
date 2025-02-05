@@ -4,9 +4,11 @@
 
 ## Resubmission
 
-* Added an S3 class and created appropriate print, summary and plot functions.
+* Improved outlier search speed.
 
-* Minor documentation updates.
+* Added a predict method for forecasting.
+
+* Minor documentation updates and bug fixes.
 
 * Examples running longer than 5s were wrapped in \donttest{}
 
