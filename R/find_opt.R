@@ -10,9 +10,9 @@
 #' @param H (optional) Matrix with holiday and trading day variables
 #' @param AO (optional) Matrix with additive outlier variables
 #' @param method Decomposition method: "additive" or "multiplicative". By default uses the additive method
-#' @param l.max maximal number of the monthly cycle variables to search for
-#' @param k.max maximal number of the yearly cycle variables to search for
-#' @param by step size in the search
+#' @param l.max Maximal number of the monthly cycle variables to search for. By default is 12
+#' @param k.max Maximal number of the yearly cycle variables to search for. By default is 42
+#' @param by Step size in the search. By default is 6.
 #'
 #' @return list with the optimal number of (yearly and monthly) fourier variables according to AIC, AICc and BIC
 #' @export
@@ -25,7 +25,7 @@
 #' print(res)
 #'
 
-find_opt=function(x,dates,H=NULL,AO=NULL,method="additive",l.max=24,k.max=42,by=6){
+find_opt=function(x,dates,H=NULL,AO=NULL,method="additive",l.max=12,k.max=42,by=6){
 
 
   if (method=="multiplicative") {
@@ -37,13 +37,28 @@ find_opt=function(x,dates,H=NULL,AO=NULL,method="additive",l.max=24,k.max=42,by=
     stop("There is not enough observations to search through the given model space")
   }
 
+  # detrending
+
   trend.init=stats::supsmu(1:length(x),x)$y
 
   y=x-trend.init
 
-  aic0=matrix(NA,nrow=length(seq(by,k.max,by)),ncol=length(seq(by,l.max,by)))
-  aicc0=matrix(NA,nrow=length(seq(by,k.max,by)),ncol=length(seq(by,l.max,by)))
-  bic0=matrix(NA,nrow=length(seq(by,k.max,by)),ncol=length(seq(by,l.max,by)))
+  # empty matrices for the information criteria
+
+  aic0=matrix(NA,nrow=length(seq(by,k.max+by,by)),ncol=length(seq(by,l.max+by,by)))
+  aicc0=matrix(NA,nrow=length(seq(by,k.max+by,by)),ncol=length(seq(by,l.max+by,by)))
+  bic0=matrix(NA,nrow=length(seq(by,k.max+by,by)),ncol=length(seq(by,l.max+by,by)))
+
+  # naming rows and columns by the number of variables
+
+  rownames(aic0)=paste0("k = ",seq(0,k.max,by))
+  colnames(aic0)=paste0("l = ",seq(0,l.max,by))
+
+  rownames(aicc0)=paste0("k = ",seq(0,k.max,by))
+  colnames(aicc0)=paste0("l = ",seq(0,l.max,by))
+
+  rownames(bic0)=paste0("k = ",seq(0,k.max,by))
+  colnames(bic0)=paste0("l = ",seq(0,l.max,by))
 
 
   # function to create fourier variables
@@ -121,9 +136,9 @@ find_opt=function(x,dates,H=NULL,AO=NULL,method="additive",l.max=24,k.max=42,by=
 
 
   # searching through model space
-  for (i in 1:length(seq(by,k.max,by))) {
+  for (i in 1:length(seq(by,k.max+by,by))) {
 
-    for (j in 1:length(seq(by,l.max,by))) {
+    for (j in 1:length(seq(by,l.max+by,by))) {
 
       X=fourier_vars(k=(i-1)*by,l=(j-1)*by,dates)
 

@@ -10,7 +10,7 @@ find_opt(
   H = NULL,
   AO = NULL,
   method = "additive",
-  l.max = 24,
+  l.max = 12,
   k.max = 42,
   by = 6
 )
@@ -26,11 +26,11 @@ find_opt(
 
 \item{method}{Decomposition method: "additive" or "multiplicative". By default uses the additive method}
 
-\item{l.max}{maximal number of the monthly cycle variables to search for}
+\item{l.max}{Maximal number of the monthly cycle variables to search for. By default is 12}
 
-\item{k.max}{maximal number of the yearly cycle variables to search for}
+\item{k.max}{Maximal number of the yearly cycle variables to search for. By default is 42}
 
-\item{by}{step size in the search}
+\item{by}{Step size in the search. By default is 6.}
 }
 \value{
 list with the optimal number of (yearly and monthly) fourier variables according to AIC, AICc and BIC
