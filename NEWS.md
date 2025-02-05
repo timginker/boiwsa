@@ -23,3 +23,7 @@
 # boiwsa 1.1.2
 
 Added an S3 class and created appropriate print, summary and plot functions.
+
+# boiwsa 1.1.3
+
+Improved outlier search speed; added a predict method for forecasting; minor bug fixes.
