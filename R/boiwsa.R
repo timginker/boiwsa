@@ -525,7 +525,7 @@ boiwsa=function(x,
 
     if (!is.null(H)) {
 
-      hol.factors[n.i]=(Xs[,(ncol(X)+1):(ncol(X)+ncol(H))]%*%beta[(ncol(X)+1):(ncol(X)+ncol(H))])[n.i]
+      hol.factors[n.i]=(as.matrix(Xs[,(ncol(X)+1):(ncol(X)+ncol(H))])%*%beta[(ncol(X)+1):(ncol(X)+ncol(H))])[n.i]
 
     }
 
@@ -657,7 +657,7 @@ boiwsa=function(x,
 
     if (!is.null(H)) {
 
-      hol.factors[n.i]=(Xs[,(ncol(X)+1):(ncol(X)+ncol(H))]%*%beta[(ncol(X)+1):(ncol(X)+ncol(H))])[n.i]
+      hol.factors[n.i]=(as.matrix(Xs[,(ncol(X)+1):(ncol(X)+ncol(H))])%*%beta[(ncol(X)+1):(ncol(X)+ncol(H))])[n.i]
 
     }
 
