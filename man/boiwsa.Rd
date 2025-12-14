@@ -18,40 +18,37 @@ boiwsa(
 )
 }
 \arguments{
-\item{x}{Input time series as a numeric vector}
+\item{x}{Numeric vector containing the observed weekly time series.}
 
-\item{dates}{a vector of class "Date", containing the data dates}
+\item{dates}{A vector of class \code{"Date"} corresponding to the observation dates.}
 
-\item{r}{Defines the rate of decay of the weights. Should be between zero and one. By default is set to 0.8.}
+\item{r}{Numeric scalar in (0, 1] defining the rate of decay of the observation weights. Defaults to \code{0.8}.}
 
-\item{auto.ao.search}{Boolean. Search for additive outliers}
+\item{auto.ao.search}{Logical. If \code{TRUE}, additive outliers are detected automatically.}
 
-\item{out.threshold}{t-stat threshold in outlier search. By default is 3.8}
+\item{out.threshold}{Numeric. t-statistic threshold used in the additive outlier search. Defaults to \code{3.8}.}
 
-\item{ao.list}{Vector with user specified additive outliers in a date format}
+\item{ao.list}{Optional vector of class \code{"Date"} specifying user-defined additive outlier dates.}
 
-\item{my.k_l}{Numeric vector defining the number of yearly and monthly trigonometric variables. If NULL, is found automatically using the information criteria. The search range is 0:36 and 0:12 with the step size of 6 for the yearly and monthly variables, respectively.}
+\item{my.k_l}{Optional numeric vector of length two specifying the number of yearly and monthly trigonometric variables. If \code{NULL}, these are selected automatically using the information criteria. The search range is 0:36 and 0:12 with the step size of 6 for the yearly and monthly variables, respectively.}
 
-\item{H}{Matrix with holiday- and trading day factors}
+\item{H}{Optional matrix of holiday and trading-day regressors with the same number of rows as \code{x}.}
 
-\item{ic}{Information criterion used in the automatic search for the number of trigonometric regressors. There are thee options: aic, aicc and bic. By default uses aicc}
+\item{ic}{Character string specifying the information criterion used in the automatic selection of trigonometric regressors. One of \code{"aic"}, \code{"aicc"}, or \code{"bic"}. Defaults to \code{"aicc"}.}
 
-\item{method}{Decomposition type: additive or multiplicative}
+\item{method}{Character string specifying the decomposition type. Either \code{"additive"} or \code{"multiplicative"}.}
 }
 \value{
-sa Seasonally adjusted series
-
-my.k_l Number of trigonometric variables used to model the seasonal pattern
-
-sf Estimated seasonal effects
-
-hol.factors Estimated holiday effects
-
-out.factors Estimated outlier effects
-
-beta Regression coefficients for the last year
-
-m lm object. Unweighted OLS regression on the full sample
+A list with the following components:
+\describe{
+\item{sa}{Seasonally adjusted series.}
+\item{my.k_l}{Number of trigonometric regressors used to model seasonality.}
+\item{sf}{Estimated seasonal component.}
+\item{hol.factors}{Estimated holiday and trading-day effects.}
+\item{out.factors}{Estimated additive outlier effects.}
+\item{beta}{Regression coefficients estimated for the last year of data.}
+\item{m}{Unweighted \code{lm} object estimated on the full sample.}
+}
 }
 \description{
 Performs seasonal adjustment and forecasting of weekly time series using a
@@ -64,12 +61,12 @@ multiplicative decompositions and produces seasonally adjusted series together
 with the associated model components. Worked examples and additional usage
 illustrations are available in the package repository on GitHub. See Ginker
 (2024), \emph{boiwsa: An R Package for Seasonal Adjustment of Weekly Data},
-\emph{The R Journal}, 16(3), 186--197, \doi{10.32614/RJ-2024-032}.
+\emph{The R Journal}, 16(3), 186--197.
 }
 \details{
 The methodological framework implemented in this function is described in
 Ginker (2024), \emph{boiwsa: An R Package for Seasonal Adjustment of Weekly Data},
-\emph{The R Journal}, 16(3), 186--197, \doi{10.32614/RJ-2024-032}.
+\emph{The R Journal}, 16(3), 186--197.
 }
 \examples{
  # Not run

@@ -10,35 +10,38 @@
 #' with the associated model components. Worked examples and additional usage
 #' illustrations are available in the package repository on GitHub. See Ginker
 #' (2024), \emph{boiwsa: An R Package for Seasonal Adjustment of Weekly Data},
-#' \emph{The R Journal}, 16(3), 186--197, \doi{10.32614/RJ-2024-032}.
+#' \emph{The R Journal}, 16(3), 186--197.
 #'
 #' @details
 #' The methodological framework implemented in this function is described in
 #' Ginker (2024), \emph{boiwsa: An R Package for Seasonal Adjustment of Weekly Data},
-#' \emph{The R Journal}, 16(3), 186--197, \doi{10.32614/RJ-2024-032}.
+#' \emph{The R Journal}, 16(3), 186--197.
 #'
 #' @import lubridate
 #' @importFrom Hmisc yearDays
 #' @importFrom stats AIC BIC lm median supsmu
 #'
-#' @param x Input time series as a numeric vector
-#' @param dates a vector of class "Date", containing the data dates
-#' @param r Defines the rate of decay of the weights. Should be between zero and one. By default is set to 0.8.
-#' @param auto.ao.search Boolean. Search for additive outliers
-#' @param out.threshold t-stat threshold in outlier search. By default is 3.8
-#' @param ao.list Vector with user specified additive outliers in a date format
-#' @param my.k_l Numeric vector defining the number of yearly and monthly trigonometric variables. If NULL, is found automatically using the information criteria. The search range is 0:36 and 0:12 with the step size of 6 for the yearly and monthly variables, respectively.
-#' @param H Matrix with holiday- and trading day factors
-#' @param ic Information criterion used in the automatic search for the number of trigonometric regressors. There are thee options: aic, aicc and bic. By default uses aicc
-#' @param method Decomposition type: additive or multiplicative
+#' @param x Numeric vector containing the observed weekly time series.
+#' @param dates A vector of class \code{"Date"} corresponding to the observation dates.
+#' @param r Numeric scalar in (0, 1] defining the rate of decay of the observation weights. Defaults to \code{0.8}.
+#' @param auto.ao.search Logical. If \code{TRUE}, additive outliers are detected automatically.
+#' @param out.threshold Numeric. t-statistic threshold used in the additive outlier search. Defaults to \code{3.8}.
+#' @param ao.list Optional vector of class \code{"Date"} specifying user-defined additive outlier dates.
+#' @param my.k_l Optional numeric vector of length two specifying the number of yearly and monthly trigonometric variables. If \code{NULL}, these are selected automatically using the information criteria. The search range is 0:36 and 0:12 with the step size of 6 for the yearly and monthly variables, respectively.
+#' @param H Optional matrix of holiday and trading-day regressors with the same number of rows as \code{x}.
+#' @param ic Character string specifying the information criterion used in the automatic selection of trigonometric regressors. One of \code{"aic"}, \code{"aicc"}, or \code{"bic"}. Defaults to \code{"aicc"}.
+#' @param method Character string specifying the decomposition type. Either \code{"additive"} or \code{"multiplicative"}.
 #'
-#' @return sa Seasonally adjusted series
-#' @return my.k_l Number of trigonometric variables used to model the seasonal pattern
-#' @return sf Estimated seasonal effects
-#' @return hol.factors Estimated holiday effects
-#' @return out.factors Estimated outlier effects
-#' @return beta Regression coefficients for the last year
-#' @return m lm object. Unweighted OLS regression on the full sample
+#' @return A list with the following components:
+#' \describe{
+#'   \item{sa}{Seasonally adjusted series.}
+#'   \item{my.k_l}{Number of trigonometric regressors used to model seasonality.}
+#'   \item{sf}{Estimated seasonal component.}
+#'   \item{hol.factors}{Estimated holiday and trading-day effects.}
+#'   \item{out.factors}{Estimated additive outlier effects.}
+#'   \item{beta}{Regression coefficients estimated for the last year of data.}
+#'   \item{m}{Unweighted \code{lm} object estimated on the full sample.}
+#' }
 #' @author Tim Ginker
 #' @export
 #' @examples
