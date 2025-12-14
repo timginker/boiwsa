@@ -1,21 +1,26 @@
-#' Original and SA data AR spectrum
+#' Compare AR spectra of original and seasonally adjusted series
 #'
-#' AR spectrum of the (detrended) original and seasonally adjusted data. Computed using [`stats::spec.ar()`] with order set to 60.
+#' Computes and plots autoregressive (AR) spectral density estimates for the
+#' detrended original series and its seasonally adjusted counterpart. Spectra are
+#' estimated using \code{\link[stats]{spec.ar}} with AR order set to 60. The plot
+#' highlights frequencies corresponding to intramonthly and intrayearly cycles.
 #'
 #' @importFrom graphics abline legend lines
 #' @importFrom stats spec.ar
 #' @import ggplot2
 #'
-#' @param x boiwsa results
+#' @param x A \code{boiwsa()} result object. Must contain components \code{x},
+#'   \code{sa}, and \code{trend}.
 #'
-#' @return AR spectrum plot
+#' @return A \code{ggplot2} object showing the AR spectral density estimates for
+#' the detrended original and seasonally adjusted series.
 #' @export
 #'
 #' @examples
 #' \donttest{
 #' # Not run
 #' # Seasonal adjustment of weekly US gasoline production
-#' res=boiwsa(x=gasoline.data$y,dates=gasoline.data$date)
+#' res <- boiwsa(x=gasoline.data$y,dates=gasoline.data$date)
 #' plot_spec(res)}
 #'
 plot_spec=function(x){

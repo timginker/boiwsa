@@ -2,7 +2,7 @@
 % Please edit documentation in R/find_outliers.R
 \name{find_outliers}
 \alias{find_outliers}
-\title{Find additive outliers}
+\title{Detect additive outliers in weekly time series}
 \usage{
 find_outliers(
   x,

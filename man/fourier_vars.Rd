@@ -2,22 +2,31 @@
 % Please edit documentation in R/fourier_vars.R
 \name{fourier_vars}
 \alias{fourier_vars}
-\title{Create fourier predictors}
+\title{Create Fourier (trigonometric) regressors for weekly data}
 \usage{
 fourier_vars(k = 1, l = 1, dates)
 }
 \arguments{
-\item{k}{Number of pairs of the yearly cycle trigonometric variables}
+\item{k}{Integer. Number of yearly-cycle Fourier harmonics (pairs of sine and
+cosine terms) to include.}
 
-\item{l}{Number of pairs of the monthly cycle trigonometric variables}
+\item{l}{Integer. Number of monthly-cycle Fourier harmonics (pairs of sine and
+cosine terms) to include.}
 
-\item{dates}{Vector of dates in a date format}
+\item{dates}{A vector of class \code{"Date"} corresponding to the observation dates.}
 }
 \value{
-Matrix with fourier variables
+A numeric matrix with \code{length(dates)} rows and \code{2 * (k + l)}
+columns containing the Fourier regressors. Columns are ordered with yearly
+terms first, followed by monthly terms. If both \code{k = 0} and \code{l = 0},
+\code{NULL} is returned.
 }
 \description{
-Creates sine and cosine variables to capture intramonthly and intrayearly cycles.
+Constructs sine and cosine regressors to capture seasonal variation at
+intrayearly and intramonthly frequencies in weekly time series. The Fourier
+terms are defined using the day-of-year and day-of-month corresponding to each
+observation date, allowing the seasonal frequencies to adapt to varying month
+and year lengths.
 }
 \examples{
 

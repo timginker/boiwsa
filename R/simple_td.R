@@ -1,16 +1,28 @@
-#' Generate simple working day variable
+#' Generate a simple working-day trading-day regressor
 #'
-#' Aggregates the count of full working days within a week and normalizes it.
+#' Constructs a weekly trading-day regressor by counting the number of full
+#' working days within each weekly period and centering the resulting series by
+#' subtracting its sample mean. Daily working-day information is supplied via
+#' \code{df.td} and mapped to the weekly dates provided in \code{dates}.
 #'
 #' @import lubridate
 #' @import dplyr
 #' @importFrom tidyr fill
 #' @importFrom rlang .data
 #'
-#' @param dates a vector of class "Date", containing the data dates
-#' @param df.td dataframe with working days. Its should consit of 2 columns named as "date" and "WORKING_DAY_PART". date column should be of class "Date". WORKING_DAY_PART should be similar to ISR_WORKING_DAY_PART in dates_il
+#' @param dates A vector of class \code{"Date"} corresponding to the weekly observation dates.
+#' @param df.td A data frame containing daily working-day information with two columns:
+#'   \code{date} (class \code{"Date"}) and \code{WORKING_DAY_PART}. Full working days
+#'   should be coded as \code{1}; all other values are treated as non-working days.
 #'
-#' @return matrix with trading day variables
+#' @return A data frame with two columns:
+#' \describe{
+#'   \item{date}{Weekly dates corresponding to \code{dates}.}
+#'   \item{td}{Centered weekly count of full working days.}
+#' }
+#' The returned object can be merged into a matrix of holiday/trading-day
+#' regressors supplied to \code{boiwsa()} via the \code{H} argument.
+#'
 #' @export
 #'
 #' @examples

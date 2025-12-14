@@ -1,15 +1,25 @@
-#' Create fourier predictors
+#' Create Fourier (trigonometric) regressors for weekly data
 #'
-#' Creates sine and cosine variables to capture intramonthly and intrayearly cycles.
+#' Constructs sine and cosine regressors to capture seasonal variation at
+#' intrayearly and intramonthly frequencies in weekly time series. The Fourier
+#' terms are defined using the day-of-year and day-of-month corresponding to each
+#' observation date, allowing the seasonal frequencies to adapt to varying month
+#' and year lengths.
 #'
 #' @importFrom Hmisc yearDays
 #' @importFrom lubridate days_in_month day yday
 #'
-#' @param k Number of pairs of the yearly cycle trigonometric variables
-#' @param l Number of pairs of the monthly cycle trigonometric variables
-#' @param dates Vector of dates in a date format
+#' @param k Integer. Number of yearly-cycle Fourier harmonics (pairs of sine and
+#'   cosine terms) to include.
+#' @param l Integer. Number of monthly-cycle Fourier harmonics (pairs of sine and
+#'   cosine terms) to include.
+#' @param dates A vector of class \code{"Date"} corresponding to the observation dates.
 #'
-#' @return Matrix with fourier variables
+#' @return A numeric matrix with \code{length(dates)} rows and \code{2 * (k + l)}
+#' columns containing the Fourier regressors. Columns are ordered with yearly
+#' terms first, followed by monthly terms. If both \code{k = 0} and \code{l = 0},
+#' \code{NULL} is returned.
+#'
 #' @export
 #'
 #' @examples

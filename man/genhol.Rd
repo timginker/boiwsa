@@ -2,30 +2,47 @@
 % Please edit documentation in R/genhol.R
 \name{genhol}
 \alias{genhol}
-\title{Generate Holiday Regression Variables}
+\title{Generate a moving-holiday regressor for weekly data}
 \usage{
 genhol(dates, holiday.dates, start = 7, end = 7)
 }
 \arguments{
-\item{dates}{a vector of class "Date", containing the data dates}
+\item{dates}{A vector of class \code{"Date"} corresponding to the weekly
+observation dates.}
 
-\item{holiday.dates}{a vector of class "Date", containing the occurrences of the holiday. It can be generated with as.Date().}
+\item{holiday.dates}{A vector of class \code{"Date"} giving the holiday
+occurrence dates (e.g., Easter, Labor Day, Thanksgiving, Rosh Hashanah,
+Pesach). Dates outside the range of \code{dates} are ignored.}
 
-\item{start}{integer, shifts backwards the start point of the holiday. Use negative values if start is after the specified date.}
+\item{start}{Integer. Number of days before each holiday date to include in the
+moving-holiday window. Negative values may be used to shift the start of the
+window to dates after the holiday.}
 
-\item{end}{integer, shifts end point of the holiday. Use negative values if end is before the specified date.}
+\item{end}{Integer. Number of days after each holiday date to include in the
+moving-holiday window. Negative values may be used to shift the end of the
+window to dates before the holiday.}
 }
 \value{
-a matrix with holiday variables that can be used as a user defined variable in boiwsa().
+A data frame with two columns:
+\describe{
+\item{date}{Weekly dates corresponding to \code{dates}.}
+\item{moving_holiday}{Calendar-centered moving-holiday regressor at weekly
+frequency.}
+}
+The returned object can be merged into a matrix of holiday or trading-day
+regressors supplied to \code{boiwsa()} via the \code{H} argument.
 }
 \description{
-Can be used to generate moving holiday regressors for the U. S. holidays of Easter,
-Labor Day, and Thanksgiving; or for Israeli Rosh Hashanah and Pesach. The variables are computed
-using the Easter formula in Table 2 of Findley et al. (1998). Uses calendar centring to avoid bias.
+Generates moving-holiday regressors for weekly data based on supplied holiday
+occurrence dates using the Easter formula described in
+Table 2 of Findley et al. (1998). The function can be used to construct
+regressors for U.S. holidays such as Easter, Labor Day, and Thanksgiving, as
+well as for Israeli holidays such as Rosh Hashanah and Pesach. The resulting
+weekly holiday regressors are calendar-centered to avoid bias.
 }
 \examples{
 
-# Creating moving holiday variable for Israeli Rosh Hashanah
+# Moving-holiday regressor for Israeli Rosh Hashanah
 data(gasoline.data)
 data(holiday_dates_il) # dates of Israeli Rosh Hashanah and Pesach
 movehol=genhol(gasoline.data$date,holiday.dates = holiday_dates_il$rosh)

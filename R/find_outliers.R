@@ -1,4 +1,4 @@
-#' Find additive outliers
+#' Detect additive outliers in weekly time series
 #'
 #' Detects additive outliers (AOs) using a regression-based t-statistic search
 #' procedure following Findley et al. (1998). The function operates on a

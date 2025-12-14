@@ -1,11 +1,20 @@
-#' Create additive outlier variables
+#' Create additive outlier indicator variables
 #'
-#' Creates a matrix with additive outlier variables. Uses the original data dates and the user specified outlier dates.
+#' Constructs a matrix of additive outlier (AO) indicator variables based on a
+#' set of user-specified outlier dates. For each outlier date that coincides with
+#' an observation date, a binary indicator equal to one is created at the
+#' corresponding position and zero elsewhere. Outlier dates not present in the
+#' observation dates are silently ignored.
 #'
-#' @param dates Vector of dates in a date format
-#' @param out.list Vector of outlier dates in a date format
+#' @param dates A vector of class \code{"Date"} corresponding to the observation dates.
+#' @param out.list A vector of class \code{"Date"} specifying candidate additive
+#'   outlier dates.
 #'
-#' @return AO matrix with outlier variables
+#' @return A numeric matrix with \code{length(dates)} rows and one column per
+#' outlier date present in \code{dates}. Column names are of the form
+#' \code{"AO <date>"}. If none of the supplied outlier dates coincide with
+#' \code{dates}, \code{NULL} is returned.
+#'
 #' @export
 #'
 #' @examples

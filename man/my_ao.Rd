@@ -2,20 +2,28 @@
 % Please edit documentation in R/my_ao.R
 \name{my_ao}
 \alias{my_ao}
-\title{Create additive outlier variables}
+\title{Create additive outlier indicator variables}
 \usage{
 my_ao(dates, out.list)
 }
 \arguments{
-\item{dates}{Vector of dates in a date format}
+\item{dates}{A vector of class \code{"Date"} corresponding to the observation dates.}
 
-\item{out.list}{Vector of outlier dates in a date format}
+\item{out.list}{A vector of class \code{"Date"} specifying candidate additive
+outlier dates.}
 }
 \value{
-AO matrix with outlier variables
+A numeric matrix with \code{length(dates)} rows and one column per
+outlier date present in \code{dates}. Column names are of the form
+\code{"AO <date>"}. If none of the supplied outlier dates coincide with
+\code{dates}, \code{NULL} is returned.
 }
 \description{
-Creates a matrix with additive outlier variables. Uses the original data dates and the user specified outlier dates.
+Constructs a matrix of additive outlier (AO) indicator variables based on a
+set of user-specified outlier dates. For each outlier date that coincides with
+an observation date, a binary indicator equal to one is created at the
+corresponding position and zero elsewhere. Outlier dates not present in the
+observation dates are silently ignored.
 }
 \examples{
 

@@ -1,8 +1,11 @@
-#' Generate Holiday Regression Variables
+#' Generate a moving-holiday regressor for weekly data
 #'
-#' Can be used to generate moving holiday regressors for the U. S. holidays of Easter,
-#' Labor Day, and Thanksgiving; or for Israeli Rosh Hashanah and Pesach. The variables are computed
-#' using the Easter formula in Table 2 of Findley et al. (1998). Uses calendar centring to avoid bias.
+#' Generates moving-holiday regressors for weekly data based on supplied holiday
+#' occurrence dates using the Easter formula described in
+#' Table 2 of Findley et al. (1998). The function can be used to construct
+#' regressors for U.S. holidays such as Easter, Labor Day, and Thanksgiving, as
+#' well as for Israeli holidays such as Rosh Hashanah and Pesach. The resulting
+#' weekly holiday regressors are calendar-centered to avoid bias.
 #'
 #'
 #' @import lubridate
@@ -10,17 +13,32 @@
 #' @importFrom tidyr fill
 #' @importFrom rlang .data
 #'
-#' @param dates a vector of class "Date", containing the data dates
-#' @param holiday.dates a vector of class "Date", containing the occurrences of the holiday. It can be generated with as.Date().
-#' @param start integer, shifts backwards the start point of the holiday. Use negative values if start is after the specified date.
-#' @param end integer, shifts end point of the holiday. Use negative values if end is before the specified date.
+#' @param dates A vector of class \code{"Date"} corresponding to the weekly
+#'   observation dates.
+#' @param holiday.dates A vector of class \code{"Date"} giving the holiday
+#'   occurrence dates (e.g., Easter, Labor Day, Thanksgiving, Rosh Hashanah,
+#'   Pesach). Dates outside the range of \code{dates} are ignored.
+#' @param start Integer. Number of days before each holiday date to include in the
+#'   moving-holiday window. Negative values may be used to shift the start of the
+#'   window to dates after the holiday.
+#' @param end Integer. Number of days after each holiday date to include in the
+#'   moving-holiday window. Negative values may be used to shift the end of the
+#'   window to dates before the holiday.
 #'
-#' @return a matrix with holiday variables that can be used as a user defined variable in boiwsa().
+#' @return A data frame with two columns:
+#' \describe{
+#'   \item{date}{Weekly dates corresponding to \code{dates}.}
+#'   \item{moving_holiday}{Calendar-centered moving-holiday regressor at weekly
+#'   frequency.}
+#' }
+#' The returned object can be merged into a matrix of holiday or trading-day
+#' regressors supplied to \code{boiwsa()} via the \code{H} argument.
+#'
 #' @references Findley, D.F., Monsell, B.C., Bell, W.R., Otto, M.C. and B.C Chen (1998). New capabilities and methods of the X-12-ARIMA seasonal-adjustment program. Journal of Business & Economic Statistics, 16(2), pp.127-152.
 #' @export
 #' @examples
 #'
-#' # Creating moving holiday variable for Israeli Rosh Hashanah
+#' # Moving-holiday regressor for Israeli Rosh Hashanah
 #' data(gasoline.data)
 #' data(holiday_dates_il) # dates of Israeli Rosh Hashanah and Pesach
 #' movehol=genhol(gasoline.data$date,holiday.dates = holiday_dates_il$rosh)
