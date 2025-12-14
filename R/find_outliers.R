@@ -1,22 +1,43 @@
 #' Find additive outliers
 #'
-#' Searches for additive outliers using the method described in Appendix C of Findley et al. (1998).
-#' If the number of trigonometric variables is not specified will search automatically through the model space to identify the best number of trigonometric variables, with the lowest AIC, AICc or BIC value.
+#' Detects additive outliers (AOs) using a regression-based t-statistic search
+#' procedure following Findley et al. (1998). The function operates on a
+#' detrended series, where the trend is estimated using \code{\link[stats]{supsmu}}.
+#' Optional holiday and trading-day regressors can be included. If the number of
+#' Fourier (trigonometric) terms is not supplied via \code{my.k_l}, it is selected
+#' automatically by minimizing AICc over a grid of yearly and monthly Fourier terms.
 #'
 #' @importFrom stats AIC BIC lm median supsmu
 #' @import lubridate
 #'
-#' @param x Numeric vector. Time series to seasonally adjust
-#' @param dates a vector of class "Date", containing the data dates
-#' @param out.tolerance t-stat threshold for outliers (see Findley et al., 1998)
-#' @param my.AO.list (optional) Vector with user defined additive outlier variables
-#' @param H (optional) Matrix with holiday and trading day variables
-#' @param my.k_l (optional) Vector with the number of fourier terms to capture the yearly and monthly cycle. If NULL, would perform automatic search using AICc criterion
-#' @param method Decomposition method: "additive" or "multiplicative". By default uses the additive method
+#' @param x Numeric vector containing the observed weekly time series.
+#' @param dates A vector of class \code{"Date"} corresponding to the observation dates.
+#' @param out.tolerance Numeric. Absolute t-statistic threshold used for AO inclusion.
+#'   Defaults to \code{3.8}.
+#' @param my.AO.list Optional vector of class \code{"Date"} specifying pre-defined AO dates.
+#'   These dates are included in the regression and excluded from the forward search.
+#' @param H Optional matrix of holiday and trading-day regressors with
+#'   \code{nrow(H) = length(x)}.
+#' @param my.k_l Optional numeric vector of length two specifying the number of yearly and
+#'   monthly Fourier harmonics \code{c(k, l)}. If \code{NULL}, \code{my.k_l} is selected
+#'   automatically by AICc.
+#' @param method Character string specifying the decomposition type. Either
+#'   \code{"additive"} or \code{"multiplicative"}. If \code{"multiplicative"},
+#'   the series is log-transformed prior to detrending. Defaults to \code{"additive"}.
 #'
-#' @return my.k_l
-#' @return ao list of AO dates
-#' @references Findley, D.F., Monsell, B.C., Bell, W.R., Otto, M.C. and B.C Chen (1998). New capabilities and methods of the X-12-ARIMA seasonal-adjustment program. Journal of Business & Economic Statistics, 16(2), pp.127-152.
+#' @return A list with the following components:
+#' \describe{
+#'   \item{ao}{Vector of class \code{"Date"} containing detected additive outlier dates,
+#'   or \code{NULL} if none are detected.}
+#'   \item{my.k_l}{Numeric vector \code{c(k, l)} giving the number of yearly and monthly
+#'   Fourier terms used in the regression.}
+#' }
+#'
+#' @references
+#' Findley, D.F., Monsell, B.C., Bell, W.R., Otto, M.C. and Chen, B.C. (1998).
+#' New capabilities and methods of the X-12-ARIMA seasonal-adjustment program.
+#' \emph{Journal of Business and Economic Statistics}, 16(2), 127--152.
+#'
 #' @export
 #'
 #' @examples

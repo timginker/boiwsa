@@ -1,20 +1,32 @@
 #' Find optimal number of fourier variables
 #'
-#' Searches through the model space to identify the best number of trigonometric variables, with the lowest AIC, AICc or BIC value.
+#' Performs a grid search over combinations of yearly and monthly Fourier
+#' (trigonometric) regressors and selects the number of terms that minimizes
+#' AIC, AICc, or BIC. Candidate models are fitted by OLS to a detrended series,
+#' where the trend is estimated using \code{\link[stats]{supsmu}}. Optional
+#' holiday/trading-day regressors (\code{H}) and additive-outlier regressors
+#' (\code{AO}) are included in every candidate specification if provided.
 #'
 #' @importFrom stats supsmu lm AIC BIC
 #' @import lubridate
 #'
-#' @param x Numeric vector. Time series to seasonally adjust
-#' @param dates a vector of class "Date", containing the data dates
-#' @param H (optional) Matrix with holiday and trading day variables
-#' @param AO (optional) Matrix with additive outlier variables
-#' @param method Decomposition method: "additive" or "multiplicative". By default uses the additive method
-#' @param l.max Maximal number of the monthly cycle variables to search for. By default is 12
-#' @param k.max Maximal number of the yearly cycle variables to search for. By default is 42
-#' @param by Step size in the search. By default is 6.
+#' @param x Numeric vector containing the observed weekly time series.
+#' @param dates A vector of class \code{"Date"} corresponding to the observation dates.
+#' @param H Optional matrix of holiday and trading-day regressors with
+#'   \code{nrow(H) = length(x)}.
+#' @param AO Optional matrix of additive-outlier regressors with
+#'   \code{nrow(AO) = length(x)}.
+#' @param method Character string specifying the decomposition type. Either
+#'   \code{"additive"} or \code{"multiplicative"}. If \code{"multiplicative"},
+#'   the series is log-transformed prior to detrending. Defaults to \code{"additive"}.
+#' @param l.max Integer. Maximum number of monthly-cycle Fourier harmonics to consider.
+#'   Defaults to \code{12}.
+#' @param k.max Integer. Maximum number of yearly-cycle Fourier harmonics to consider.
+#'   Defaults to \code{42}.
+#' @param by Integer. Step size for the grid search over \code{k} and \code{l}.
+#'   Defaults to \code{6}.
 #'
-#' @return list with the optimal number of (yearly and monthly) fourier variables according to AIC, AICc and BIC
+#' @return List with the optimal number of (yearly and monthly) fourier variables according to AIC, AICc and BIC.
 #' @export
 #'
 #' @examples
