@@ -1,0 +1,11 @@
+bibentry(
+  bibtype = "Article",
+  title = "boiwsa: An R Package for Seasonal Adjustment of Weekly Data",
+  author = person("Tim", "Ginker"),
+  journal = "The R Journal",
+  year = "2024",
+  volume = "16",
+  number = "3",
+  pages = "186--197",
+  doi = "10.32614/RJ-2024-032"
+)
