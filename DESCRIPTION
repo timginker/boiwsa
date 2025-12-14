@@ -7,7 +7,13 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-7138-5417")),
     person("Jon", "Lachman", role = "ctb", email = "jon@indicio.com"))
 Maintainer: Tim Ginker <tim.ginker@gmail.com>           
-Description: Perform seasonal adjustment of weekly data. The package provides a user-friendly interface for computing seasonally adjusted estimates of weekly data and includes functions for the creation of country-specific prior adjustment variables, as well as diagnostic tools to assess the quality of the adjustments. The method is described in more detail in Ginker (2023) <doi:10.13140/RG.2.2.12221.44000>.
+Description: Perform seasonal adjustment and forecasting of weekly data.
+    The package provides a user-friendly interface for computing seasonally
+    adjusted estimates and forecasts of weekly time series and includes
+    functions for the construction of country-specific prior adjustment
+    variables, as well as diagnostic tools to assess the quality of the
+    adjustments. The methodology is described in more detail in
+    Ginker (2024) <doi:10.13140/RG.2.2.12221.44000>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

@@ -54,7 +54,22 @@ beta Regression coefficients for the last year
 m lm object. Unweighted OLS regression on the full sample
 }
 \description{
-Performs seasonal adjustment of weekly data. For more details on the usage of this function see the paper or the examples on Github.
+Performs seasonal adjustment and forecasting of weekly time series using a
+regression-based decomposition framework estimated by discounted least squares.
+Seasonality is modeled using trigonometric regressors, while holiday,
+trading-day, and calendar effects are incorporated through additional
+covariates. Additive outliers can be detected automatically using an optional
+outlier search procedure. The function supports both additive and
+multiplicative decompositions and produces seasonally adjusted series together
+with the associated model components. Worked examples and additional usage
+illustrations are available in the package repository on GitHub. See Ginker
+(2024), \emph{boiwsa: An R Package for Seasonal Adjustment of Weekly Data},
+\emph{The R Journal}, 16(3), 186--197, \doi{10.32614/RJ-2024-032}.
+}
+\details{
+The methodological framework implemented in this function is described in
+Ginker (2024), \emph{boiwsa: An R Package for Seasonal Adjustment of Weekly Data},
+\emph{The R Journal}, 16(3), 186--197, \doi{10.32614/RJ-2024-032}.
 }
 \examples{
  # Not run
