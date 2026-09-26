@@ -94,7 +94,7 @@ To install boiwsa, you can use devtools:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("timginker/boiwsa")
+pak::pak("timginker/boiwsa")
 ```
 
 Alternatively, you can clone the repository and install the package from source:
@@ -130,6 +130,18 @@ plot(gasoline.data$date,
      main="Weekly US gasoline production")
 ```
 
+
+Before adjustment, `plot_weekly_patterns()` provides a visual summary of the seasonal pattern. The function removes a smooth trend and displays boxplots by week within the month and ISO week within the year. Differences across groups can reveal recurring within-month or within-year patterns; the upper axis indicates approximate month positions.
+
+```{r gasoline-patterns-original, fig.width=12, fig.height=4.5}
+plot_weekly_patterns(
+  dates = gasoline.data$date,
+  y = gasoline.data$y,
+  ylab = "Detrended gasoline production"
+)
+```
+
+An initial visual assessment suggests no intra-monthly cycle, but provides strong evidence of an intra-yearly cycle.
 
 Once you have your data loaded, you can use the `boiwsa` function to perform weekly seasonal adjustment:
 

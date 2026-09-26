@@ -120,7 +120,7 @@ To install boiwsa, you can use devtools:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("timginker/boiwsa")
+pak::pak("timginker/boiwsa")
 ```
 
 Alternatively, you can clone the repository and install the package from
@@ -157,7 +157,27 @@ plot(gasoline.data$date,
      main="Weekly US gasoline production")
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="70%" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" alt="" width="70%" />
+
+Before adjustment, `plot_weekly_patterns()` provides a visual summary of
+the seasonal pattern. The function removes a smooth trend and displays
+boxplots by week within the month and ISO week within the year.
+Differences across groups can reveal recurring within-month or
+within-year patterns; the upper axis indicates approximate month
+positions.
+
+``` r
+plot_weekly_patterns(
+  dates = gasoline.data$date,
+  y = gasoline.data$y,
+  ylab = "Detrended gasoline production"
+)
+```
+
+<img src="man/figures/README-gasoline-patterns-original-1.png" alt="" width="100%" />
+
+An initial visual assessment suggests no intra-monthly cycle, but
+provides strong evidence of an intra-yearly cycle.
 
 Once you have your data loaded, you can use the `boiwsa` function to
 perform weekly seasonal adjustment:
@@ -206,7 +226,7 @@ visualize the seasonal pattern:
 plot(res)
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="70%" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" alt="" width="70%" />
 
 To assess the quality of the adjustment, we can plot the autoregressive
 spectrum of the original and seasonally adjusted data, as illustrated in
@@ -216,7 +236,7 @@ the code below:
 plot_spec(res)
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="70%" />
+<img src="man/figures/README-unnamed-chunk-6-1.png" alt="" width="70%" />
 
 It is evident that the series originally had a single intra-yearly
 seasonal cycle, but this component was completely removed by the
@@ -254,11 +274,11 @@ cycle.
 ``` r
 library(tidyverse)
 #> ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-#> ✔ dplyr     1.1.4     ✔ readr     2.1.4
-#> ✔ forcats   1.0.0     ✔ stringr   1.5.1
-#> ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-#> ✔ lubridate 1.9.3     ✔ tidyr     1.3.0
-#> ✔ purrr     1.0.2     
+#> ✔ dplyr     1.2.1     ✔ readr     2.2.0
+#> ✔ forcats   1.0.1     ✔ stringr   1.6.0
+#> ✔ ggplot2   4.0.2     ✔ tibble    3.3.1
+#> ✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+#> ✔ purrr     1.2.2     
 #> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 #> ✖ dplyr::filter() masks stats::filter()
 #> ✖ dplyr::lag()    masks stats::lag()
@@ -273,7 +293,7 @@ ggplot() +
   xlab("Year")
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-1.png" width="70%" />
+<img src="man/figures/README-unnamed-chunk-8-1.png" alt="" width="70%" />
 
 Furthermore, each year, there are two weeks in which the activity
 plunges to nearly zero due to the existence of two moving holidays
@@ -350,7 +370,7 @@ Subsequently, we can visually examine the results of the procedure:
 plot(res)
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.png" width="70%" />
+<img src="man/figures/README-unnamed-chunk-10-1.png" alt="" width="70%" />
 
 As we can see in the plot, the procedure has successfully eliminated the
 annual and monthly seasonal cycles, along with the influences of moving
@@ -368,7 +388,7 @@ highlighting its effectiveness.
 plot_spec(res)
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.png" width="70%" />
+<img src="man/figures/README-unnamed-chunk-11-1.png" alt="" width="70%" />
 
 ### Forecasting
 
@@ -421,7 +441,7 @@ legend(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="70%" />
+<img src="man/figures/README-unnamed-chunk-12-1.png" alt="" width="70%" />
 
 # References
 
