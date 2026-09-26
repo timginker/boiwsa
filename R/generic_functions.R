@@ -221,3 +221,154 @@ predict.boiwsa <- function(object, ...) {
   # Returning the results
   return(list(forecast = fct_fin, fit = fit))
 }
+
+#' Visualize seasonal patterns in weekly data
+#'
+#' Plot detrended observations by week within the month and ISO week within
+#' the year. For a boiwsa object, use its seasonally adjusted series.
+#'
+#' @param dates Observation dates (a Date vector, POSIXt vector, or character
+#'   vector convertible to Date), or an object of class boiwsa.
+#' @param y Numeric vector of observations. Omit when dates is a boiwsa object.
+#' @param ylab Vertical axis label. NULL selects a label based on the input.
+#' @param base_size Base font size in points; must be greater than two.
+#'
+#' @details
+#' Observations with missing dates or non-finite values are removed, and the
+#' remaining observations are sorted by date. Duplicate dates are not allowed.
+#' A trend estimated by stats::supsmu() is subtracted from the series, using
+#' elapsed calendar time as the smoothing coordinate.
+#'
+#' Within-month groups represent days 1--7, 8--14, 15--21, 22--28, and 29--31
+#' of the observation date. Within-year groups use ISO weeks 1--53. The upper
+#' axis shows approximate month positions based on the middle of each month
+#' in 2025. Outlier points are hidden but remain in the boxplot calculations.
+#'
+#' This is a descriptive diagnostic, not a formal test for residual
+#' seasonality. Moving holidays need separate assessment.
+#'
+#' @return A patchwork object containing two ggplot panels.
+#' @importFrom rlang .data
+#' @import patchwork
+#' @export
+#' @examples
+#' plot_weekly_patterns(gasoline.data$date, gasoline.data$y)
+#' \dontrun{
+#' res <- boiwsa(x = gasoline.data$y, dates = gasoline.data$date)
+#' plot_weekly_patterns(res)
+#' }
+plot_weekly_patterns <- function(dates, y = NULL, ylab = NULL,
+                                 base_size = 12) {
+  adjusted <- inherits(dates, "boiwsa")
+  if (adjusted) {
+    if (!is.null(y)) {
+      stop("Omit 'y' when supplying a boiwsa object.", call. = FALSE)
+    }
+    y <- dates$sa
+    dates <- dates$dates
+    if (is.null(y) || is.null(dates)) {
+      stop("The boiwsa object must contain 'sa' and 'dates'.", call. = FALSE)
+    }
+  }
+  if (!is.numeric(y) || !is.null(dim(y))) {
+    stop("'y' must be a numeric vector.", call. = FALSE)
+  }
+  if (!(inherits(dates, "Date") || inherits(dates, "POSIXt") ||
+        is.character(dates))) {
+    stop("'dates' must be Date, POSIXt, or character dates.", call. = FALSE)
+  }
+  dates <- tryCatch(as.Date(dates), error = function(e) {
+    stop("'dates' could not be converted to Date.", call. = FALSE)
+  })
+  if (length(dates) != length(y)) {
+    stop("'dates' and 'y' must have the same length.", call. = FALSE)
+  }
+  if (!is.numeric(base_size) || length(base_size) != 1L ||
+      !is.finite(base_size) || base_size <= 2) {
+    stop("'base_size' must be a finite number greater than two.", call. = FALSE)
+  }
+  if (is.null(ylab)) {
+    ylab <- if (adjusted) "Detrended seasonally adjusted series" else
+      "Detrended series"
+  }
+
+  keep <- is.finite(as.numeric(dates)) & is.finite(y)
+  if (any(!keep)) {
+    warning(sum(!keep), " observation(s) with invalid dates or values removed.",
+            call. = FALSE)
+  }
+  df <- data.frame(date = dates[keep], y = as.numeric(y[keep]))
+  df <- df[order(df$date), , drop = FALSE]
+  if (nrow(df) < 5L) {
+    stop("At least five valid observations are required.", call. = FALSE)
+  }
+  if (anyDuplicated(df$date)) {
+    stop("Observation dates must be unique.", call. = FALSE)
+  }
+
+  time <- as.numeric(df$date - min(df$date))
+  df$detrended <- df$y - stats::supsmu(time, df$y)$y
+  df$wn <- ceiling(as.integer(format(df$date, "%d")) / 7)
+  df$wy <- as.integer(format(df$date, "%V"))
+  month_dates <- as.Date(sprintf("2025-%02d-15", 1:12))
+  month_weeks <- as.integer(format(month_dates, "%V"))
+
+  journal_theme <- ggplot2::theme_classic(
+    base_size = base_size, base_family = "serif"
+  ) + ggplot2::theme(
+    plot.title = ggplot2::element_text(
+      size = base_size + 1, face = "plain",
+      margin = ggplot2::margin(b = 12)
+    ),
+    axis.title = ggplot2::element_text(size = base_size),
+    axis.title.x = ggplot2::element_text(margin = ggplot2::margin(t = 9)),
+    axis.title.y = ggplot2::element_text(margin = ggplot2::margin(r = 9)),
+    axis.text = ggplot2::element_text(color = "black", size = base_size - 1),
+    axis.line = ggplot2::element_line(linewidth = 0.35),
+    axis.ticks = ggplot2::element_line(linewidth = 0.35),
+    axis.ticks.x.top = ggplot2::element_blank(),
+    axis.line.x.top = ggplot2::element_blank(),
+    axis.text.x.top = ggplot2::element_text(
+      size = base_size - 2, margin = ggplot2::margin(b = 6)
+    ),
+    plot.margin = ggplot2::margin(10, 12, 10, 10)
+  )
+
+  panel <- function(variable, title, xlab) {
+    ggplot2::ggplot(df, ggplot2::aes(
+      x = .data[[variable]], y = .data$detrended, group = .data[[variable]]
+    )) +
+      ggplot2::geom_hline(
+        yintercept = 0, color = "grey65", linewidth = 0.35,
+        linetype = "dashed"
+      ) +
+      ggplot2::geom_boxplot(
+        width = 0.65, fill = "grey90", color = "grey20",
+        linewidth = 0.35, outlier.shape = NA
+      ) +
+      ggplot2::labs(title = title, x = xlab, y = ylab) + journal_theme
+  }
+
+  p_month <- panel("wn", "A. Within-month pattern", "Week number in a month") +
+    ggplot2::scale_x_continuous(breaks = 1:5, limits = c(0.5, 5.5))
+  p_year <- panel("wy", "B. Within-year pattern", "Week number in a year") +
+    ggplot2::scale_x_continuous(
+      breaks = c(1, seq(4, 52, 4)),
+      limits = c(0.5, max(52, df$wy) + 0.5),
+      sec.axis = ggplot2::dup_axis(
+        breaks = month_weeks, labels = month.abb, name = NULL
+      )
+    ) + ggplot2::labs(y = NULL)
+
+  # Use the same quartile/whisker convention as the displayed boxplots.
+  whiskers <- function(p) {
+    boxes <- ggplot2::ggplot_build(p)$data[[2L]]
+    c(boxes$ymin, boxes$ymax)
+  }
+  limits <- range(c(0, whiskers(p_month), whiskers(p_year)))
+  padding <- max(diff(limits) * 0.08, 1e-8)
+  limits <- limits + c(-padding, padding)
+  p_month <- p_month + ggplot2::coord_cartesian(ylim = limits, expand = FALSE)
+  p_year <- p_year + ggplot2::coord_cartesian(ylim = limits, expand = FALSE)
+  patchwork::wrap_plots(p_month, p_year, nrow = 1)
+}
