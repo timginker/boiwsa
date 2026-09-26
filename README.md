@@ -294,6 +294,23 @@ ggplot() +
 
 <img src="man/figures/README-unnamed-chunk-8-1.png" alt="" width="70%" />
 
+We can examine the seasonal patterns more directly using
+`plot_weekly_patterns()`. After removing a smooth trend, the function
+groups observations by week within the month and week within the year.
+The plots suggest both intra-monthly and intra-yearly variation,
+consistent with the registration and seasonal employment patterns
+described above.
+
+``` r
+plot_weekly_patterns(
+  dates = lbm$date,
+  y = lbm$IES_IN_W_ADJ,
+  ylab = "Detrended weekly registrations"
+)
+```
+
+<img src="man/figures/README-unemployment-patterns-original-1.png" alt="" width="100%" />
+
 Furthermore, each year, there are two weeks in which the activity
 plunges to nearly zero due to the existence of two moving holidays
 associated with Rosh Hashanah and Pesach. Moreover, a working day effect
